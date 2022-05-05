@@ -1,0 +1,36 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .loginTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .loginInput {
+    border-bottom: 2px solid black;
+    padding: 10px;
+    width: 90%;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .warningMessasge {
+    font-size: 14px;
+    color: red;
+    font-weight: 500;
+  }
+
+  .loginBtn {
+    border: 1.5px solid #0080f5;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #0080f5;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+}
