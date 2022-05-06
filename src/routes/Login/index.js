@@ -15,8 +15,7 @@ const BASIC_DATA = {
 
 function Login() {
   const [userName, setUserName] = useState('')
-  const [isAvailableName, setIsAvailableName] = useState(true)
-  const [userId, setUserId] = useState('')
+  const [isAvailableName, setIsAvailableName] = useState(false)
 
   const navigate = useNavigate()
 
@@ -63,7 +62,12 @@ function Login() {
       <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : null)}>
         닉네임 형식에 맞게 입력해주세요.
       </p>
-      <button type='button' onClick={onClickLoginBtn} className={styles.loginBtn}>
+      <button
+        disabled={!isAvailableName}
+        type='button'
+        onClick={onClickLoginBtn}
+        className={cx(styles.loginBtn, isAvailableName ? styles.ableBtn : styles.disableBtn)}
+      >
         Login
       </button>
     </div>

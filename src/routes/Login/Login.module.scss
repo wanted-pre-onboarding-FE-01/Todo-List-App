@@ -35,9 +35,17 @@
     padding: 10px 20px;
     margin-top: 20px;
     font-weight: 600;
+    border-radius: 30px;
+  }
+
+  .ableBtn {
     color: colors.$BLUE;
     cursor: pointer;
     border: 1.5px solid colors.$BLUE;
-    border-radius: 30px;
+  }
+
+  .disableBtn {
+    color: colors.$DISABLE_BUTTON_BLUE;
+    border: 1.5px solid colors.$DISABLE_BUTTON_BLUE;
   }
 }
