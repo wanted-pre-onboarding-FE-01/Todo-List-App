@@ -19,6 +19,7 @@ export const getUserByNickName = (nickName) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.userNickName === nickName)[0]
 }
+
 export const getUserByUserId = (userId) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.id === userId)[0]
@@ -45,11 +46,13 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
     const index = pastTodos.findIndex((pastTodo) => pastTodo.id === deleteTodo.id)
     pastTodos.splice(index, 1)
   })
-  pastTodos.forEach((pastTodo) => {pastTodo.date = moment().format('YYYY/MM/DD')})
+  pastTodos.forEach((pastTodo) => {
+    pastTodo.date = moment().format('YYYY/MM/DD')
+  })
   userData.data.todoList.push(...pastTodos)
   const allData = getAllData()
   allData.forEach((user) => {
-    if(user.userNickName === nickName) {
+    if (user.userNickName === nickName) {
       user.data.todoList = userData.data.todoList
     }
   })
