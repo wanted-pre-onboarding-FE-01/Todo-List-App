@@ -42,20 +42,39 @@
       margin: 15% 10%;
       overflow-x: scroll;
 
-      .colorCircle {
-        margin-left: 10px;
-      }
-
-      .colorCircle:nth-child(1) {
-        margin-left: 0;
-      }
-
       .circle {
         width: 34px;
         height: 34px;
         cursor: pointer;
-        background-color: aqua;
         border-radius: 50%;
+      }
+
+      .colorCircle {
+        margin-left: 10px;
+      }
+
+      .addColor {
+        position: relative;
+        width: 34px;
+        height: 34px;
+        cursor: pointer;
+        border: 2px solid #a8a8a8;
+        border-radius: 50%;
+      }
+
+      .addColor::before,
+      .addColor::after {
+        position: absolute;
+        top: 7px;
+        left: 14px;
+        width: 2px;
+        height: 16px;
+        content: ' ';
+        background-color: #a8a8a8;
+      }
+
+      .addColor::before {
+        transform: rotate(90deg);
       }
     }
 

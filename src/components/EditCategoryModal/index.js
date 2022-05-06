@@ -1,6 +1,7 @@
 import styles from "./EditCategoryModal.module.scss"
 import PropTypes from 'prop-types'
-import { IoIosClose} from 'react-icons/io'
+import { IoIosClose } from 'react-icons/io'
+
 
 function EditCategoryModal({ isShow = true }) {
 
@@ -20,6 +21,7 @@ function EditCategoryModal({ isShow = true }) {
           <li className={styles.colorCircle}><div className={styles.circle} style={{backgroundColor: '#8DB4FF'}} /></li>
           <li className={styles.colorCircle}><div className={styles.circle} style={{backgroundColor: '#FF9DB3'}} /></li>
           <li className={styles.colorCircle}><div className={styles.circle} style={{backgroundColor: '#FFAB8A'}} /></li>
+          <li className={styles.colorCircle}><div className={styles.addColor} /></li>
         </ul>
         <div className={styles.inputWrapper}>
           <input type='text' placeholder='새로운 카테고리 이름'/>
