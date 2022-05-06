@@ -22,10 +22,9 @@ function Login() {
     <div className={styles.loginWrapper}>
       <p className={styles.loginTitle}>닉네임을 입력해주세요</p>
       <input maxLength={15} onChange={onChangeInputValue} className={styles.loginInput} />
-      {/* <p className={`${styles.warningMessage} ${isAvailableName ? styles.displayNone : ''}`}>
+      <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : null)}>
         닉네임 형식에 맞지 않습니다
-      </p> */}
-      <p className={cx('warningMessage')}>닉네임 형식에 맞지 않습니다</p>
+      </p>
       <div className={styles.loginBtn}>Login</div>
     </div>
   )
