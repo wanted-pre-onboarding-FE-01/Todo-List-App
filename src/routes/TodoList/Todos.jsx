@@ -2,42 +2,74 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Todo from './Todo'
 import styles from './Todos.module.scss'
+import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
 
-const TODO_LIST = [
+const DATA = [
   {
-    id: 'something',
-    todo: 'todo 내용을 좀 더 길게 적어볼까 ㅏㅎ하하',
-    categoryId: 'some string',
-    date: '2022/00/00',
-    isDone: false,
+    id: '1234sol',
+    userNickName: 'sol',
+    isLogined: true,
+    data: {
+      category: [
+        { id: '1School', categoryName: 'School', color: '#A8A8A8' },
+        { id: '2Business', categoryName: 'Business', color: '#7373eb' },
+        { id: '3zip', categoryName: 'zip', color: '#FF5252' },
+      ],
+      todoList: [
+        { id: '1아이스크림먹기', todo: '아이스크림먹기', categoryId: '1카테고리', date: '2022/05/04', isDone: false },
+        { id: '3과제하기', todo: '과제하기', categoryId: '3카테고리', date: '2022/05/03', isDone: false },
+        { id: '12기상하기', todo: '기상하기', categoryId: '1카테고리', date: '2022/05/06', isDone: false },
+        { id: '1234강의듣기', todo: '강의듣기', categoryId: '2카테고리', date: '2022/05/05', isDone: false },
+        { id: '123러닝 다녀오기', todo: '러닝 다녀오기', categoryId: '3카테고리', date: '2022/05/05', isDone: false },
+      ],
+    },
   },
   {
-    id: 'must be',
-    todo: '수정 버튼 구현하기 + 디자인',
-    categoryId: 'some string',
-    date: '2022/00/00',
-    isDone: false,
-  },
-  {
-    id: 'unique',
-    todo: '카테고리 색을 prop으로 받기',
-    categoryId: 'some string',
-    date: '2022/00/00',
-    isDone: false,
+    id: '1234sol33',
+    userNickName: 'sol33',
+    isLogined: false,
+    data: {
+      category: [
+        { id: '1School', categoryName: 'School', color: '#A8A8A8' },
+        { id: '2Business', categoryName: 'Business', color: '#7373eb' },
+        { id: '3zip', categoryName: 'zip', color: '#FF5252' },
+      ],
+      todoList: [
+        { id: '1아이스크림먹기', todo: '아이스크림먹기', categoryId: '1카테고리', date: '2022/05/04', isDone: false },
+        { id: '3과제하기', todo: '과제하기', categoryId: '3카테고리', date: '2022/05/03', isDone: false },
+        { id: '12기상하기', todo: '기상하기', categoryId: '1카테고리', date: '2022/05/06', isDone: false },
+        { id: '1234강의듣기', todo: '강의듣기', categoryId: '2카테고리', date: '2022/05/05', isDone: false },
+        { id: '123러닝 다녀오기', todo: '러닝 다녀오기', categoryId: '3카테고리', date: '2022/05/05', isDone: false },
+      ],
+    },
   },
 ]
 
 function Todos() {
   // 현재 로그인한 사용자 정보
-  // const location = useLocation()
-  // const { state } = location
+  const location = useLocation()
+  const { state } = location
+  // const { userId, isNewUser } = state
 
-  const [todoList, setTodoList] = useState(TODO_LIST)
-  // const grid = TODO_LIST.length
+  // const DATA = getAllData()
+  const currentLoginedUser = DATA.filter((data) => data.isLogined)[0]
+  const currentLoginedUserData = currentLoginedUser.data
+  const { category, todoList } = currentLoginedUserData
+
+  const [todoListState, setTodoListState] = useState(todoList)
+  // const USER_ID = getUserByUserId(TODO_LIST)
 
   useEffect(() => {
     // localStorage에 저장
-  }, [todoList])
+    DATA.forEach((data) => {
+      // console.log(data.id, data.data.todoList)
+      // if (data.id === userId) {
+      if (data.id === '1234sol') {
+        data.data.todoList = todoListState
+      }
+    })
+    updateAllData(DATA)
+  }, [todoListState])
 
   const handleAddClick = (e) => {
     // console.log('handleAddClick')
@@ -55,7 +87,7 @@ function Todos() {
     const { dataset, checked } = e.currentTarget
     const { id } = dataset
 
-    setTodoList((prev) => {
+    setTodoListState((prev) => {
       const targetIndex = prev.findIndex((todo) => todo.id === id)
       const firstDoneTodoIndex = prev.findIndex((todo) => todo.isDone)
       const newList = [...prev]
@@ -81,7 +113,7 @@ function Todos() {
   const handleDeleteClick = (e) => {
     const { dataset } = e.currentTarget
     const { id } = dataset
-    setTodoList((prev) => {
+    setTodoListState((prev) => {
       const removedList = prev.filter((todo) => todo.id !== id)
       return removedList
     })
@@ -90,7 +122,7 @@ function Todos() {
   return (
     <ul className={styles.tasks}>
       <p className={styles.tasksTitle}>Today&apos;s</p>
-      {todoList.map((todo, index) => (
+      {todoListState.map((todo) => (
         <Todo
           key={todo.id}
           data-id={todo.id}
