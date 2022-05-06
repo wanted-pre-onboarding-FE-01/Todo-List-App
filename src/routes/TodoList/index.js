@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { CheckIcon, SearchIcon } from '../../assets/svgs'
 import styles from './TodoList.module.scss'
 import { cx } from '../../styles'
+import { getUserByUserId } from '../../utils/data/localStorage'
 
 const INIT_TODO = [
   {
@@ -59,6 +60,10 @@ function TodoList() {
     setSearchValue(value)
   }
 
+  // Test Get data from localStage
+  const USER_ID = '1234sol'
+  const data = getUserByUserId(USER_ID)
+
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
@@ -71,7 +76,7 @@ function TodoList() {
               <SearchIcon onClick={handleToggleSearchBar} />
             </div>
           </div>
-          {todoList
+          {data.data.todoList
             .filter((todo) => {
               if (!searchValue) {
                 return true
