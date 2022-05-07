@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
-import styles from './Todo.module.scss'
+import { Link } from 'react-router-dom'
 import { cx } from '../../styles'
+import styles from './Todo.module.scss'
 
 function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteClick }) {
   const { id, todo, categoryId, date, isDone } = todoList
   const todoCategoryColor = category.filter((todoCategory) => todoCategory.id === categoryId)[0].color
-
-  // const [openEditModal]
 
   return (
     <li key={id} className={cx(styles.task, isDone && styles.checked)} onClick={handleTodoClick} aria-hidden='true'>
@@ -25,9 +24,11 @@ function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteC
           <div className={styles.lineThrough} />
         ) : (
           <div className={styles.buttonWrapper}>
-            <button className={styles.editButton} type='button'>
-              Edit
-            </button>
+            <Link to='/updateTodo' state={{ todoList, beforePage: '/calendar', modify: true }}>
+              <button className={styles.editButton} type='button'>
+                Edit
+              </button>
+            </Link>
             <button type='button' className={styles.deleteButton} data-id={id} onClick={handleDeleteClick}>
               Delete
             </button>
