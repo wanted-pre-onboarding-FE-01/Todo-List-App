@@ -34,8 +34,13 @@
     > div > div {
       padding: 1% 0;
 
-      > div > div > div {
-        margin: 0 14%;
+      > div > div {
+        position: inherit;
+        left: -6px;
+
+        > div {
+          margin: 0 16% 0 0;
+        }
       }
     }
 

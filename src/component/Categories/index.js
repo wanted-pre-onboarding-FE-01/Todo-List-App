@@ -25,7 +25,7 @@ function Categories() {
 
   const sliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: categoryArray?.length > 2,
     arrows: false,
     speed: 1000,
     slidesToShow: 2,
