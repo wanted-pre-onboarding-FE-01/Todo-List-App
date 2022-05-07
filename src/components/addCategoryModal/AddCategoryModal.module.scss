@@ -156,15 +156,15 @@
         width: 115px;
         height: 46px;
         font-weight: 600;
-        color: colors.$BLUE;
+        color: colors.$TODO_THEME;
         cursor: pointer;
-        border: 1px solid colors.$BLUE;
+        border: 1px solid colors.$TODO_THEME;
         border-radius: 30px;
         transition: all ease 0.2s;
 
         &:hover {
           color: colors.$WHITE;
-          background-color: colors.$BLUE;
+          background-color: colors.$TODO_THEME;
         }
       }
     }
