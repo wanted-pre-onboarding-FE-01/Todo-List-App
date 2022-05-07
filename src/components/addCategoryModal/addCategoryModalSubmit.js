@@ -1,6 +1,5 @@
 import styles from './AddCategoryModal.module.scss'
 import { useState } from 'react'
-import clsx from 'clsx'
 
 /* import { PopoverPicker } from './PopoverPicker' */
 
@@ -20,8 +19,8 @@ function Modalsubmit() {
     event.preventDefault() // 콘솔출력용
     console.log(`${event.target.categoryName.value}`)
     console.log(`${event.target.color.value}`)
-    event.target.categoryName.value = '' // flushes the name value
-    event.target.color.value = '' // flushes the wow value
+    event.target.categoryName.value = '' // flushes the categoryName value
+    event.target.color.value = '#ffffff' // flushes the color value
   }
 
   return (
@@ -30,7 +29,7 @@ function Modalsubmit() {
         <div className={styles.colorPalette}>
           {colorArr.map((colorPrepare) => (
             <button
-              className={clsx(styles.colorPrepare)}
+              className={styles.colorPrepare}
               type='button'
               key={`colorPrepare${colorPrepare.colorName}`}
               onClick={() => setColor(colorPrepare.colorValue)}

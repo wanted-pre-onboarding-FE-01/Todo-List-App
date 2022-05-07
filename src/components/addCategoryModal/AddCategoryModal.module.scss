@@ -75,29 +75,15 @@
           border-radius: 50%;
         }
 
-        :nth-child(1) {
-          background-color: colors.$RED;
+        $colors: (1: colors.$RED, 2: colors.$ORANGE, 3: colors.$YELLOW, 4: colors.$GREEN, 5: colors.$BLUE, 6: colors.$PURPLE);
+
+        @each $key,
+        $color in $colors {
+          :nth-child(#{$key}) {
+            background-color: #{$color};
+          }
         }
 
-        :nth-child(2) {
-          background-color: colors.$ORANGE;
-        }
-
-        :nth-child(3) {
-          background-color: colors.$YELLOW;
-        }
-
-        :nth-child(4) {
-          background-color: colors.$GREEN;
-        }
-
-        :nth-child(5) {
-          background-color: colors.$BLUE;
-        }
-
-        :nth-child(6) {
-          background-color: colors.$PURPLE;
-        }
 
         .hiddenBox {
           position: relative;
