@@ -55,3 +55,4 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
   })
   updateAllData(allData)
 }
+

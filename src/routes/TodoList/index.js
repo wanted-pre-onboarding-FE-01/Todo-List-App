@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import { CheckIcon } from '../../assets/svgs'
 import styles from './TodoList.module.scss'
 import Todos from './Todos'
 
 function TodoList() {
-  const handleAddClick = (e) => {
+  const handleAddClick = () => {
     // console.log('handleAddClick')
   }
 

@@ -7,6 +7,7 @@ import styles from './Todo.module.scss'
 
 function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteClick }) {
   const { id, todo, categoryId, date, isDone } = todoList
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const todoCategoryColor = category.filter((category) => category.id === categoryId)[0].color
 
   // const [openEditModal]

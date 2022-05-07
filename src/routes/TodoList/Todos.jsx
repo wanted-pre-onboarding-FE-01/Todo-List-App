@@ -4,6 +4,9 @@ import Todo from './Todo'
 import styles from './Todos.module.scss'
 import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
 
+import { cx } from '../../styles'
+import { SearchIcon } from '../../assets/svgs'
+
 const DATA = [
   {
     id: '1234sol',
@@ -119,20 +122,47 @@ function Todos() {
     })
   }
 
+  // search state and functions
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  const handleToggleSearchBar = () => setSearchOpen((prev) => !prev)
+
+  const [searchValue, setSearchValue] = useState()
+
+  const handleChangeSearchValue = (e) => {
+    const {
+      currentTarget: { value },
+    } = e
+    setSearchValue(value)
+  }
+
   return (
     <ul className={styles.tasks}>
-      <p className={styles.tasksTitle}>Today&apos;s</p>
-      {todoListState.map((todo) => (
-        <Todo
-          key={todo.id}
-          data-id={todo.id}
-          todoList={todo}
-          category={category}
-          handleChange={handleChange}
-          handleAddClick={handleAddClick}
-          handleDeleteClick={handleDeleteClick}
-        />
-      ))}
+      <div className={styles.header}>
+        <p className={styles.tasksTitle}>Today&apos;s</p>
+        <div className={cx(styles.searchContainer, searchOpen && styles.searchOpen)}>
+          {searchOpen && <input placeholder='Search to do...' onChange={handleChangeSearchValue} />}
+          <SearchIcon onClick={handleToggleSearchBar} />
+        </div>
+      </div>
+      {todoListState
+        .filter((todo) => {
+          if (!searchValue) {
+            return true
+          }
+          return todo.todo.includes(searchValue)
+        })
+        .map((todo) => (
+          <Todo
+            key={todo.id}
+            data-id={todo.id}
+            todoList={todo}
+            category={category}
+            handleChange={handleChange}
+            handleAddClick={handleAddClick}
+            handleDeleteClick={handleDeleteClick}
+          />
+        ))}
     </ul>
   )
 }
