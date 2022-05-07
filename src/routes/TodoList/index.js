@@ -10,7 +10,23 @@ function TodoList() {
   const { state } = location
   // const { userId, isNewUser } = state
 
-  const DATA = getAllData()
+  // const DATA = getAllData()
+  const DATA = [
+    {
+      id: '1234sol',
+      userNickName: 'sol',
+      isLogined: true,
+      data: {
+        category: [
+          { id: '1School', categoryName: 'School', color: '#A8A8A8' },
+          { id: '2Business', categoryName: 'Business', color: '#7373eb' },
+          { id: '3zip', categoryName: 'zip', color: '#FF5252' },
+        ],
+        todoList: [],
+      },
+    },
+  ]
+
   const currentLoginedUser = DATA.filter((data) => data.isLogined)[0]
   const currentLoginedUserData = currentLoginedUser.data
   const { category, todoList } = currentLoginedUserData

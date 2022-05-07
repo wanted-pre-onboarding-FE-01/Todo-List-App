@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 
 import { cx } from '../../styles'
 import { SearchIcon } from '../../assets/svgs'
+import EmptyTodoList from './EmptyTodoList'
 
 const DATA = [
   {
@@ -134,11 +135,14 @@ function Todos({ todoListState, setTodoListState, category }) {
       <div className={styles.header}>
         <p className={styles.tasksTitle}>Today&apos;s</p>
         <div className={cx(styles.searchContainer, searchOpen && styles.searchOpen)}>
-          {searchOpen && <input placeholder='Search to do...' onChange={handleChangeSearchValue} />}
+          {searchOpen && (
+            <input className={styles.searchInput} placeholder='Search to do...' onChange={handleChangeSearchValue} />
+          )}
           <SearchIcon onClick={handleToggleSearchBar} />
         </div>
       </div>
       <div className={styles.todosWrapper}>
+        {todoListState.length === 0 && <EmptyTodoList />}
         {todoListState
           .filter((todo) => {
             if (!searchValue) {
@@ -165,7 +169,7 @@ function Todos({ todoListState, setTodoListState, category }) {
 export default Todos
 
 Todos.propTypes = {
-  todoListState: PropTypes.arrayOf,
+  todoListState: PropTypes.arrayOf(PropTypes.arrayOf),
   setTodoListState: PropTypes.func,
-  category: PropTypes.arrayOf,
+  category: PropTypes.arrayOf(PropTypes.arrayOf),
 }
