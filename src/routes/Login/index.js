@@ -29,7 +29,6 @@ function Login() {
     setIsAvailableName(checkUserNameValidation(e.currentTarget.value))
   }
 
-  // 메인페이지에서 useLocation의 state를 통해서 userId값 받을 수 있음
   const onClickLoginBtn = () => {
     const item = JSON.parse(localStorage.getItem('todo'))
     const newUser = {
@@ -59,7 +58,7 @@ function Login() {
     <div className={styles.loginWrapper}>
       <p className={styles.loginTitle}>닉네임을 입력해주세요</p>
       <input maxLength={15} onChange={onChangeInputValue} className={styles.loginInput} />
-      <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : null)}>
+      <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : '')}>
         닉네임 형식에 맞게 입력해주세요.
       </p>
       <button
