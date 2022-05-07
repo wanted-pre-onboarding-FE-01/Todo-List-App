@@ -33,27 +33,27 @@
         width: 18px;
         height: 18px;
         color: colors.$GRAY6;
-      }
 
-      ::before,
-      ::after {
-        position: absolute;
-        content: '';
-        background: colors.$GRAYA;
-        transform: rotate(45deg);
-      }
+        &::before,
+        &::after {
+          position: absolute;
+          content: '';
+          background: colors.$GRAYA;
+          transform: rotate(45deg);
+        }
 
-      ::before {
-        top: -4px;
-        width: 1px;
-        height: 25px;
-      }
+        &::before {
+          top: -4px;
+          width: 1px;
+          height: 25px;
+        }
 
-      ::after {
-        top: 8px;
-        right: -4px;
-        width: 25px;
-        height: 1px;
+        &::after {
+          top: 8px;
+          right: -4px;
+          width: 25px;
+          height: 1px;
+        }
       }
     }
 
@@ -75,7 +75,7 @@
           border-radius: 50%;
         }
 
-        $colors: (1: colors.$RED, 2: colors.$ORANGE, 3: colors.$YELLOW, 4: colors.$GREEN, 5: colors.$BLUE, 6: colors.$PURPLE);
+        $colors: (1: colors.$CRED, 2: colors.$CORANGE, 3: colors.$CYELLOW, 4: colors.$CGREEN, 5: colors.$CBLUE);
 
         @each $key,
         $color in $colors {

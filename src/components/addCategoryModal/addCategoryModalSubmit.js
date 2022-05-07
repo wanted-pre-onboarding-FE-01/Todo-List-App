@@ -5,12 +5,11 @@ export default function Modalsubmit() {
   const [color, setColor] = useState('#ffffff')
 
   const colorArr = [
-    { colorName: 'red', colorValue: '#ff3b30' },
-    { colorName: 'orange', colorValue: '#ff9500' },
-    { colorName: 'yellow', colorValue: '#ffcc00' },
-    { colorName: 'green', colorValue: '#34c759' },
-    { colorName: 'blue', colorValue: '#007aff' },
-    { colorName: 'purple', colorValue: '#af52de' },
+    { colorName: 'red', colorValue: '#d4697b' },
+    { colorName: 'orange', colorValue: '#d27a56' },
+    { colorName: 'yellow', colorValue: '#d1a345' },
+    { colorName: 'green', colorValue: '#53a787' },
+    { colorName: 'blue', colorValue: '#566dda' },
   ]
 
   function handleForm(event) {
