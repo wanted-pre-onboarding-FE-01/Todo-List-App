@@ -4,9 +4,9 @@
 @use "/src/styles/mixins/position";
 
 .openModal {
+  @include position.middleBox;
   z-index: levels.$MODAL;
   display: flex;
-  @include position.middleBox;
   align-items: center;
   width: 360px;
   height: 720px;
@@ -35,25 +35,25 @@
         color: colors.$GRAY6;
       }
 
-      ::before {
+      ::before,
+      ::after {
         position: absolute;
-        top: -4px;
-        width: 1px;
-        height: 25px;
         content: '';
         background: colors.$GRAYA;
         transform: rotate(45deg);
       }
 
+      ::before {
+        top: -4px;
+        width: 1px;
+        height: 25px;
+      }
+
       ::after {
-        position: absolute;
         top: 8px;
         right: -4px;
         width: 25px;
         height: 1px;
-        content: '';
-        background: colors.$GRAYA;
-        transform: rotate(45deg);
       }
     }
 
@@ -83,7 +83,6 @@
             background-color: #{$color};
           }
         }
-
 
         .hiddenBox {
           position: relative;
@@ -115,11 +114,9 @@
           }
         }
 
-        .hiddenBox::before {
+        .hiddenBox::before,
+        .hiddenBox::after {
           @include position.middleBox;
-          z-index: 1;
-          width: 1px;
-          height: 10px;
           content: '';
           background: colors.$GRAYA;
           user-select: none;
@@ -128,16 +125,15 @@
           -ms-user-select: none;
         }
 
+        .hiddenBox::before {
+          z-index: 1;
+          width: 1px;
+          height: 10px;
+        }
+
         .hiddenBox::after {
-          @include position.middleBox;
           width: 10px;
           height: 1px;
-          content: '';
-          background: colors.$GRAYA;
-          user-select: none;
-          -webkit-user-select: none;
-          -webkit-touch-callout: none;
-          -ms-user-select: none;
         }
       }
 

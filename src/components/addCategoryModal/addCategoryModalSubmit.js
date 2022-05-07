@@ -1,9 +1,7 @@
 import styles from './AddCategoryModal.module.scss'
 import { useState } from 'react'
 
-/* import { PopoverPicker } from './PopoverPicker' */
-
-function Modalsubmit() {
+export default function Modalsubmit() {
   const [color, setColor] = useState('#ffffff')
 
   const colorArr = [
@@ -37,8 +35,6 @@ function Modalsubmit() {
             />
           ))}
 
-          {/* <PopoverPicker color={color} onChange={setColor} /> */}
-
           <div className={styles.hiddenBox}>
             <input
               className={styles.colorPicker}
@@ -64,5 +60,3 @@ function Modalsubmit() {
     </div>
   )
 }
-
-export default Modalsubmit
