@@ -130,7 +130,7 @@ function Categories() {
       <div className={styles.categoriesBox}>
         <Slider {...sliderSettings}>
           {category.map((el, i) => (
-            <div key={`category-${i}`} className={styles.category}>
+            <button type='button' key={`category-${i}`} className={styles.category}>
               <ul>
                 <li className={styles.count}>{getCategoryTotalTask(el.id)} TASK</li>
                 <li className={styles.categoryName}>{el.categoryName}</li>
@@ -140,7 +140,7 @@ function Categories() {
                   max={getCategoryTotalTask(el.id)}
                 />
               </ul>
-            </div>
+            </button>
           ))}
           <button type='button' className={styles.category} onClick={handleClickClose}>
             <BsPlusLg className={styles.categoryPlus} />
