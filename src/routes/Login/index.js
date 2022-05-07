@@ -54,10 +54,18 @@ function Login() {
     }
   }
 
+  const onPressEnter = (e) => {
+    if (isAvailableName) {
+      if (e.key === 'Enter') {
+        onClickLoginBtn()
+      }
+    }
+  }
+
   return (
     <div className={styles.loginWrapper}>
       <p className={styles.loginTitle}>닉네임을 입력해주세요</p>
-      <input maxLength={15} onChange={onChangeInputValue} className={styles.loginInput} />
+      <input maxLength={15} onKeyPress={onPressEnter} onChange={onChangeInputValue} className={styles.loginInput} />
       <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : '')}>
         닉네임 형식에 맞게 입력해주세요.
       </p>
