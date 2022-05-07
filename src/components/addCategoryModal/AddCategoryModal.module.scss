@@ -63,19 +63,13 @@
       height: 180px;
       padding: 0 20px;
 
-      .colorButtons {
+      .colorPalette {
         z-index: 10000;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
 
-        .colorPalette {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-        }
-
-        .colorPicker {
+        .colorPrepare {
           width: 28px;
           height: 28px;
           border-radius: 50%;
@@ -103,6 +97,61 @@
 
         :nth-child(6) {
           background-color: colors.$PURPLE;
+        }
+
+        .hiddenBox {
+          position: relative;
+          width: 28px;
+          height: 28px;
+          overflow: hidden;
+          border: 1px solid colors.$GRAYA;
+          border-radius: 50%;
+
+          .colorPicker {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            width: 235px;
+            height: 50px;
+          }
+
+          input[type='color'] {
+            -webkit-appearance: none;
+            border-radius: 50%;
+          }
+
+          input[type='color']::-webkit-color-swatch-wrapper {
+            padding: 0;
+          }
+
+          input[type='color']::-webkit-color-swatch {
+            border: none;
+          }
+        }
+
+        .hiddenBox::before {
+          @include position.middleBox;
+          z-index: 1;
+          width: 1px;
+          height: 10px;
+          content: '';
+          background: colors.$GRAYA;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          -ms-user-select: none;
+        }
+
+        .hiddenBox::after {
+          @include position.middleBox;
+          width: 10px;
+          height: 1px;
+          content: '';
+          background: colors.$GRAYA;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          -ms-user-select: none;
         }
       }
 
