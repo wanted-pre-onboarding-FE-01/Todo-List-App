@@ -114,6 +114,26 @@
         border-radius: 50px;
       }
     }
+
+    .colorPickerWrapper {
+      position: absolute;
+      top: 0;
+      left: calc(50% - 50px);
+      display: flex;
+      width: 130px;
+
+      .colorPickerBtn {
+        position: absolute;
+        top: calc(50% - 12px);
+        right: 0;
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        color: colors.$TASKS_TITLE;
+        border: 1px solid colors.$TASKS_TITLE;
+        border-radius: 50%;
+      }
+    }
   }
 }
 
