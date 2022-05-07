@@ -51,7 +51,7 @@ export default function Modalsubmit() {
           className={styles.categoryName}
           type='text'
           name='categoryName'
-          maxLength='20'
+          maxLength='15'
           placeholder='카테고리 이름 입력'
           required
         />
