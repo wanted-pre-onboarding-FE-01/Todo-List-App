@@ -1,0 +1,110 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.top {
+  .calendarBox {
+    display: inline-block;
+    width: 100%;
+
+    .calendarIcon {
+      float: right;
+      width: 50;
+      height: 50;
+      fill: #0080f5;
+    }
+  }
+
+  > h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38px;
+    color: colors.$BIG_TITLE;
+    letter-spacing: 0.2px;
+  }
+
+  > h3 {
+    margin: 32px 0 16px;
+    font-size: 13px;
+    font-weight: bold;
+    color: colors.$GRAYA;
+    letter-spacing: 0.2px;
+  }
+
+  .categoriesBox {
+    > div > div {
+      padding: 1% 0;
+
+      > div > div {
+        position: inherit;
+        left: -6px;
+
+        > div {
+          margin: 0 16% 0 0;
+        }
+      }
+    }
+
+    .category {
+      all: unset;
+      width: 46%;
+      height: inherit;
+      padding: 8%;
+      background-color: colors.$WHITE;
+      border-radius: 20px;
+      box-shadow: 3px 3px 3px #c1c1c1;
+
+      .categoryPlus {
+        width: 100%;
+        margin: 18% 0;
+        color: colors.$GRAYA;
+      }
+
+      .count {
+        font-size: 12px;
+        color: colors.$GRAYA;
+      }
+
+      .categoryName {
+        padding: 6% 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bar {
+        position: relative;
+        top: -7px;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        height: 3px;
+        animation: progressBar 0.2s ease-out;
+      }
+
+      progress::-webkit-progress-bar {
+        background-color: rgb(238, 238, 238);
+        border-radius: 8px;
+      }
+
+      progress::-webkit-progress-value {
+        background-color: #35495e;
+        border-radius: 8px;
+      }
+
+      progress::-moz-progress-bar {
+        background-color: rgb(238, 238, 238);
+        border-radius: 8px;
+      }
+      @keyframes progressBar {
+        0% {
+          width: 0%;
+        }
+
+        100% {
+          width: 80%;
+        }
+      }
+    }
+  }
+}

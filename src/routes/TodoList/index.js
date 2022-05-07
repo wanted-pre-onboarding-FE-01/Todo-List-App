@@ -2,6 +2,7 @@ import styles from './TodoList.module.scss'
 import Todos from './Todos'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Categories from '../../components/Categories'
 import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
 
 function TodoList() {
@@ -22,7 +23,23 @@ function TodoList() {
           { id: '2Business', categoryName: 'Business', color: '#7373eb' },
           { id: '3zip', categoryName: 'zip', color: '#FF5252' },
         ],
-        todoList: [],
+        todoList: [
+          { id: '1아이스크림먹기', todo: '아이스크림먹기', categoryId: '1School', date: '2022/05/04', isDone: false },
+          { id: '3과제하기', todo: '과제하기', categoryId: '2Business', date: '2022/05/03', isDone: false },
+          { id: '12기상하기', todo: '기상하기', categoryId: '2Business', date: '2022/05/06', isDone: false },
+          { id: '1234강의듣기', todo: '강의듣기', categoryId: '3zip', date: '2022/05/05', isDone: false },
+          { id: '123러닝 다녀오기', todo: '러닝 다녀오기', categoryId: '3zip', date: '2022/05/05', isDone: false },
+          { id: '3과232342제하기', todo: '과제하기', categoryId: '1School', date: '2022/05/03', isDone: false },
+          { id: '12기상2357하기', todo: '기상하기', categoryId: '1School', date: '2022/05/06', isDone: false },
+          { id: '1234강232343455의듣기', todo: '강의듣기', categoryId: '1School', date: '2022/05/05', isDone: false },
+          {
+            id: '123러닝324345678989867 다녀오기',
+            todo: '러닝 다녀오기',
+            categoryId: '1School',
+            date: '2022/05/05',
+            isDone: false,
+          },
+        ],
       },
     },
   ]
@@ -53,7 +70,7 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <h1>Hi! this is your assignment.</h1>
+        <Categories />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
         <button type='button' className={styles.addButton} onClick={handleAddClick} aria-label='Add button' />
       </div>
