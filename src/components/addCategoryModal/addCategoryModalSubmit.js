@@ -1,4 +1,4 @@
-import styles from './Modal.module.scss'
+import styles from './AddCategoryModal.module.scss'
 import { useState } from 'react'
 import clsx from 'clsx'
 
@@ -51,10 +51,10 @@ function Modalsubmit() {
           name='name'
           type='text'
           maxLength='20'
-          placeholder='categoryname'
+          placeholder='카테고리 이름 입력'
           required
         />
-        <input type='submit' className={styles.submitButton} />
+        <input type='submit' className={styles.submitButton} value='Add' />
       </form>
     </div>
   )

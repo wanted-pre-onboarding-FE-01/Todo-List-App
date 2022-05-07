@@ -3,8 +3,9 @@ import { CheckIcon } from '../../assets/svgs'
 import styles from './TodoList.module.scss'
 
 /* addCategory */
-import AddCategory from '../../components/addCategory/Modal'
-import ModalAddSchedule from '../../components/addCategory/Modalsubmit'
+import AddCategory from '../../components/addCategoryModal/addCategoryModal'
+import AddCategoryModalSubmit from '../../components/addCategoryModal/addCategoryModalSubmit'
+/* addCategory */
 
 const INIT_TODO = [
   {
@@ -74,10 +75,10 @@ function TodoList() {
 
         {/* addCategory */}
         <button type='button' onClick={openModal} aria-label='Add button'>
-          버튼
+          + Add Category
         </button>
         <AddCategory open={modalOpen} close={closeModal}>
-          <ModalAddSchedule />
+          <AddCategoryModalSubmit />
         </AddCategory>
         {/* addCategory */}
       </div>

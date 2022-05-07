@@ -1,4 +1,4 @@
-import styles from './Modal.module.scss'
+import styles from './AddCategoryModal.module.scss'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
@@ -9,9 +9,7 @@ export default function Modal(props) {
       {open ? (
         <section className={styles.outerModal}>
           <div className={styles.innerModal}>
-            <button type='button' className={styles.close} onClick={close}>
-              &times;
-            </button>
+            <button type='button' className={styles.close} onClick={close} aria-label='close' />
           </div>
           <main>{children}</main>
         </section>
