@@ -16,11 +16,11 @@ const DATA = [
         { id: '3zip', categoryName: 'zip', color: '#FF5252' },
       ],
       todoList: [
-        { id: '1아이스크림먹기', todo: '아이스크림먹기', categoryId: '1카테고리', date: '2022/05/04', isDone: false },
-        { id: '3과제하기', todo: '과제하기', categoryId: '3카테고리', date: '2022/05/03', isDone: false },
-        { id: '12기상하기', todo: '기상하기', categoryId: '1카테고리', date: '2022/05/06', isDone: false },
-        { id: '1234강의듣기', todo: '강의듣기', categoryId: '2카테고리', date: '2022/05/05', isDone: false },
-        { id: '123러닝 다녀오기', todo: '러닝 다녀오기', categoryId: '3카테고리', date: '2022/05/05', isDone: false },
+        { id: '1아이스크림먹기', todo: '아이스크림먹기', categoryId: '1School', date: '2022/05/04', isDone: false },
+        { id: '3과제하기', todo: '과제하기', categoryId: '2Business', date: '2022/05/03', isDone: false },
+        { id: '12기상하기', todo: '기상하기', categoryId: '2Business', date: '2022/05/06', isDone: false },
+        { id: '1234강의듣기', todo: '강의듣기', categoryId: '3zip', date: '2022/05/05', isDone: false },
+        { id: '123러닝 다녀오기', todo: '러닝 다녀오기', categoryId: '3zip', date: '2022/05/05', isDone: false },
       ],
     },
   },
@@ -126,7 +126,8 @@ function Todos() {
         <Todo
           key={todo.id}
           data-id={todo.id}
-          todo={todo}
+          todoList={todo}
+          category={category}
           handleChange={handleChange}
           handleAddClick={handleAddClick}
           handleDeleteClick={handleDeleteClick}
