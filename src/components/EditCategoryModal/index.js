@@ -1,23 +1,24 @@
 import styles from "./EditCategoryModal.module.scss"
 import PropTypes from 'prop-types'
 import { IoIosClose } from 'react-icons/io'
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { HexColorPicker } from "react-colorful"
 import { useColorPicker } from "../../hooks/ColorPicker"
+import  useOnClickOutside  from '../../hooks/useClickOutside'
 
 const BRIEF_COLOR_LIST = [ 
   { color: '#d4697b', isCheck: false }, { color: '#d27a56', isCheck: false }, { color: '#d1a345', isCheck: false }, { color: '#53a787', isCheck: false },{ color: '#566dda', isCheck: false }]
 
 function EditCategoryModal({ isShow, category, close, edit, remove, setCategory }) {
-
+  
   const [colorList, setColorList] = useState(BRIEF_COLOR_LIST)
-
+  
   const [moreOn, setMoreOn] = useState(false)
-
+  
   const moreButtonHandler = () => {
     setMoreOn(prev => !prev)
   }
-
+  
   const [newColor, changeNewColorHandler, addColorHandler] = useColorPicker(BRIEF_COLOR_LIST[0].color, setColorList, setMoreOn)
 
   const [categoryName, setCategoryName] = useState(category.categoryName)
@@ -25,6 +26,9 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
   const categoryNameChangeHandler = (e) => {
     setCategoryName(e.currentTarget.value)
   }
+
+  const modalRef = useRef()
+  useOnClickOutside(modalRef, ()  => close(setColorList, setCategoryName, setMoreOn))
 
   const [selectColor, setSelectColor] = useState(category.color)
 
@@ -40,7 +44,7 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
 
   return(
     <div className={isShow ? styles.backBoard : styles.modalOff}>
-      <div className={styles.main}>
+      <div ref={modalRef} className={styles.main}>
         <div className={styles.closeBtnWrapper}>
           <IoIosClose color="#A8A8A8" className={styles.closeBtn} onClick={() => close(setColorList, setCategoryName, setMoreOn)}/>
         </div>
@@ -61,7 +65,7 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
           </li>
         </ul>
         <div className={styles.inputWrapper}>
-          <input type='text' value={categoryName} maxLength={20} placeholder={category.categoryName} onChange={categoryNameChangeHandler}/>
+          <input type='text' value={categoryName} maxLength={15} placeholder={category.categoryName} onChange={categoryNameChangeHandler}/>
         </div>
         <div className={styles.btnsWrapper}>
           <button type='button' className={styles.btn} onClick={() => edit(category.id, categoryName, selectColor, setCategory, setColorList, setCategoryName, setMoreOn )}>Edit</button>
