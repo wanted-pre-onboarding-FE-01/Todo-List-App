@@ -45,8 +45,8 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
           <IoIosClose color="#A8A8A8" className={styles.closeBtn} onClick={() => close(setColorList, setCategoryName, setMoreOn)}/>
         </div>
         <ul className={styles.colorCircleList} >
-          {colorList.map((color) => 
-            <li key={`color_index_${color.color}`} className={styles.colorCircle}>
+          {colorList.map((color, index) => 
+            <li key={`color_index_${color.color + index}`} className={styles.colorCircle}>
               <button
                 type='button'
                 aria-label="Select color"
