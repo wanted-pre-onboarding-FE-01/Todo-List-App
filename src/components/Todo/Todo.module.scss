@@ -1,0 +1,142 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.task {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  line-height: 72px;
+  background-color: colors.$WHITE;
+  border-radius: 32px;
+  box-shadow: 0 10px 20px 0 rgba(colors.$BLACK, 2%);
+  transition: 0.2s;
+
+  .editButton,
+  .deleteButton,
+  .buttonWrapper {
+    height: 0;
+    opacity: 0;
+  }
+
+  &:hover {
+    &:not(.checked) {
+      height: 120px;
+    }
+
+    .dragIcon {
+      position: absolute;
+      display: block;
+      width: 20px;
+    }
+
+    .editButton,
+    .deleteButton {
+      opacity: 100;
+    }
+
+    .buttonWrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+      width: 150px;
+      height: 40px;
+      margin-bottom: 10px;
+      opacity: 100;
+    }
+  }
+
+  + .task {
+    margin-top: 18px;
+  }
+
+  .checkboxWrapper {
+    @include flexbox.flexbox(center center);
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin: 0 24px;
+
+    .checkIcon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .notCheckedIcon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  input[type='checkbox'] {
+    @include position.middleBox;
+    z-index: levels.$CHECK_BOX;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s;
+
+    &:checked {
+      border: 0;
+    }
+  }
+
+  .titleWrapper {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .title {
+      overflow: hidden;
+      color: colors.$TASK_ITEM_TITLE;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lineThrough {
+      position: absolute;
+      top: 50%;
+      width: inherit;
+      height: 1px;
+      border-bottom: 1px solid black;
+      animation: border_anim 0.3s linear forwards;
+    }
+  }
+
+  .editButton,
+  .deleteButton {
+    width: 55px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    color: colors.$BLUE;
+    cursor: pointer;
+    border: 1px solid colors.$BLUE;
+    border-radius: 30px;
+    transition: 0.2s;
+
+    &:hover {
+      color: colors.$WHITE;
+      background-color: colors.$BLUE;
+    }
+  }
+}
+
+@keyframes border_anim {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.dragIcon {
+  display: none;
+}
