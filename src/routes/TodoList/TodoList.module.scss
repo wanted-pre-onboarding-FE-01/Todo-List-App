@@ -1,16 +1,9 @@
-@use "/src/styles/constants/colors";
-@use "/src/styles/constants/levels";
-@use "/src/styles/mixins/flexbox";
-@use "/src/styles/mixins/position";
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
 
 .todoList {
-  // position: relative;
-  // width: 360px;
-  // height: 720px;
-  // padding: 120px 40px 40px;
-  // background-color: #fafbfe;
-  // border-radius: 60px;
-
   h1 {
     font-size: 32px;
     font-weight: 600;
@@ -24,6 +17,44 @@
     color: colors.$TASKS_TITLE;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .header {
+    @include flexbox.flexbox(between, center);
+
+    .searchContainer {
+      position: relative;
+      width: 10%;
+      height: 30px;
+      padding: 5px;
+      margin-top: 5px;
+      background-color: colors.$WHITE;
+      border: 1px solid colors.$GRAYD;
+      border-radius: 5px;
+      transition: 0.5s ease all;
+
+      &.searchOpen {
+        width: 75%;
+      }
+
+      input {
+        position: absolute;
+        width: 95%;
+        padding-left: 20px;
+        color: colors.$GRAY6;
+      }
+
+      svg {
+        position: absolute;
+        top: 7px;
+        left: 6px;
+        z-index: 100;
+        width: 15px;
+        height: 15px;
+        color: colors.$GRAY6;
+        cursor: pointer;
+      }
+    }
   }
 
   .task {
@@ -56,7 +87,7 @@
       }
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       @include position.middleBox;
       z-index: levels.$CHECK_BOX;
       width: 28px;
@@ -102,7 +133,7 @@
       @include position.middleBox;
       width: 20px;
       height: 2px;
-      content: "";
+      content: '';
       background-color: colors.$WHITE;
     }
 
