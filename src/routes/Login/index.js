@@ -66,7 +66,7 @@ function Login() {
     <div className={styles.loginWrapper}>
       <p className={styles.loginTitle}>닉네임을 입력해주세요</p>
       <input maxLength={15} onKeyPress={onPressEnter} onChange={onChangeInputValue} className={styles.loginInput} />
-      <p className={cx(styles.warningMessage, isAvailableName ? styles.displayNone : '')}>
+      <p className={cx(styles.warningMessage, { [styles.displayNone]: isAvailableName })}>
         닉네임 형식에 맞게 입력해주세요.
       </p>
       <button
