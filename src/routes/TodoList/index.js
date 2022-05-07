@@ -82,7 +82,6 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <h1>Hi! this is your assignment.</h1>
         <Categories />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
         {/* addCategory */}
