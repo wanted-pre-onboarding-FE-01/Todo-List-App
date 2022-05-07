@@ -1,23 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import useOnClickOutside from '../../hooks/useOnClickOutside'
 
-import ColorList from '../components/ColorList'
+import AddCategoryForm from '../components/AddCategoryForm/AddCategoryForm'
+import SelectedCategoryForm from '../components/SelectedCategoryForm/SelectedCategoryForm'
+import ColorList from '../components/ColorList/ColorList'
 
 import styles from './UpdateTodo.module.scss'
 import { GrClose } from 'react-icons/gr'
-import { BsPlusLg } from 'react-icons/bs'
+import { BsPlusLg, BsFillCircleFill } from 'react-icons/bs'
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
 const strData = localStorage.getItem('todo')
 const data = JSON.parse(strData)
-// 추후에 <li> map() data[0] 수정하기
+// 변경하기 : data[0], tempId
 console.log(data)
 
 function TodoList() {
+  const boxRef = useRef()
+  const colorBtnRef = useRef(null)
+  const inputRef = useRef(null)
+
+  const [todoData, setTodoData] = useState(data)
+  const [isBoxOpen, setBoxOpen] = useState(false)
   const [addCategoryStatus, setAddCategoryStatus] = useState(true)
   const [showCategoryColors, setShowCategoryColors] = useState(false)
   const [selectedColor, setSelectedColor] = useState('#8f99bf')
-  const [radioStatus, setRadioStatus] = useState(false)
 
+  useOnClickOutside(boxRef, () => setBoxOpen(false))
+
+  const handleClickCategoryBtn = () => {setBoxOpen(prev => !prev)}
+  
   const handleClickAddCategory = () => {
     setAddCategoryStatus(false)
   }
@@ -26,10 +38,14 @@ function TodoList() {
 
   const handleCategorySubmit = (e) => {
     e.preventDefault()
-    console.log()
+    const color = colorBtnRef.current.value
+    const categoryName = inputRef.current.value
+    const id = `${new Date().getMilliseconds() + categoryName}`
+    const newArr = [...todoData[0].data.category, {id, categoryName, color}]
+    data[0].data.category = newArr
+    setTodoData(data)
+    setAddCategoryStatus(true)
   }
-
-  const handleClickRadioBtn = () => {setRadioStatus(prev => !prev)}
 
   return (
     <>
@@ -39,63 +55,63 @@ function TodoList() {
         </button>
       </header>
       <section className={styles.textWrapper}>
-        <input type='text' placeholder='Task를 입력해주세요.'/>
+        <input type='text' placeholder='Enter new task.'/>
       </section>
       <main className={styles.selectedWrapper}>
         <div className={styles.selectedBtnsWrapper}>
           <button type='button'>2022 / 05 / 05</button>
-          <button type='button'>
+          <button type='button' onClick={handleClickCategoryBtn}>
             <div className={styles.cateGoryCircle}/>
-            아아아아아아아아아아아아아아아
+            Select Category
           </button>
         </div>
         <div className={styles.selectedListWrapper}>
-          <div className={styles.box}>
-            {addCategoryStatus
-              ? <button 
-                  type='button' 
-                  className={styles.addCategoryBtn} 
-                  onClick={handleClickAddCategory}
-                >
-                <BsPlusLg className={styles.addIcon} />
-                <span>Add Category</span>
-              </button>
-              : 
-              <form onSubmit={handleCategorySubmit} className={styles.form}>
-                <button 
-                  type='button' 
-                  className={styles.addCategoryColor} 
-                  onClick={handleClickColorDot}
-                  style={{color: selectedColor}}
-                >{}</button>
-                <input 
-                  type='text' 
-                  placeholder='카테고리를 입력해주세요.'
-                  maxLength='15'
-                />
-                <button type='submit'>
-                  aa
+          {isBoxOpen &&
+            <div className={styles.box} ref={boxRef}>
+              {addCategoryStatus
+                ? <button 
+                    type='button' 
+                    className={styles.addCategoryBtn} 
+                    onClick={handleClickAddCategory}
+                  >
+                  <BsPlusLg className={styles.addIcon} />
+                  <span>Add Category</span>
                 </button>
-              </form>
-            }
-            {showCategoryColors && <ColorList setSelectedColor={setSelectedColor} />}
-            <ul className={styles.categoryList}>
-              {data[0].data.category.map(category => {
-                return (
-                  <li key={category.id}>
-                    <input 
-                      type='radio' 
-                      id={category.id} 
-                      name='categoryList' 
-                      onClick={handleClickRadioBtn} 
-                      style={{border: `2px solid ${category.color}`}}
-                    />
-                    <label htmlFor={category.id}>{category.categoryName}</label>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+                : <AddCategoryForm
+                selectedColor={selectedColor}
+                colorBtnRef={colorBtnRef}
+                inputRef={inputRef}
+                handleClickColorDot={handleClickColorDot}
+                handleCategorySubmit={handleCategorySubmit}
+                />
+                
+              }
+              {showCategoryColors && 
+                <ColorList 
+                setShowCategoryColors={setShowCategoryColors} 
+                  setSelectedColor={setSelectedColor} 
+                />}
+              <ul className={styles.categoryList}>
+                {todoData[0].data.category.map(category => {
+                  return (
+                    <li key={category.id}>
+                      <div className={styles.inputWrapper}>
+                        <input 
+                          type='radio' 
+                          id={category.id} 
+                          name='categoryList' 
+                          style={{border: `2px solid ${category.color}`}}
+                        />
+                        <BsFillCircleFill fill={category.color} className={styles.checkedIcon}/>
+                      </div>
+                      <label htmlFor={category.id}>{category.categoryName}</label>
+                    </li>
+                  )
+                })}
+              </ul>
+              <button type='button'>add</button>
+            </div>
+          }
         </div>
       </main>
       <footer>

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styles from './ColorList.module.scss'
 import { BsPlusCircle } from 'react-icons/bs'
 import { useState } from 'react'
@@ -8,13 +9,14 @@ const COLORS = [
     '#d4f3d6', '#d0e1fc', '#e0d1f7', '#d9dbdb']
 ]
 
-function ColorList(props) {
+function ColorList({setShowCategoryColors, setSelectedColor}) {
   const [showMoreColors, setShowMoreColors] = useState(false)
   
   const handleShowMoreColors = () => {setShowMoreColors(prev => !prev)}
   const handleClickColor = (e) => {
     const {value} = e.currentTarget
-    // props.setSelectedColor(value)
+    setSelectedColor(value)
+    setShowCategoryColors(false)
     setShowMoreColors(false)
   }
 
@@ -47,6 +49,11 @@ function ColorList(props) {
       }
     </section>
   )
+}
+
+ColorList.propTypes = {
+  setShowCategoryColors: PropTypes.func.isRequired,
+  setSelectedColor: PropTypes.func.isRequired
 }
 
 export default ColorList

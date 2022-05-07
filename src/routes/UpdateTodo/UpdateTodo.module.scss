@@ -1,4 +1,6 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/position';
 
 .closeBtnWrapper {
@@ -97,42 +99,9 @@
         }
       }
 
-      .form {
-        display: flex;
-        align-items: center;
-        width: 260px;
-        height: 50px;
-        padding: 10px;
-        margin-left: 20px;
-
-        .addCategoryColor {
-          width: 15px;
-          height: 15px;
-          background-color: colors.$TASKS_TITLE;
-          border-radius: 50%;
-        }
-
-        input {
-          width: 170px;
-          margin-left: 10px;
-          font-size: 15px;
-          color: colors.$GRAY6;
-
-          &::placeholder {
-            font-size: 15px;
-          }
-        }
-
-        button {
-          width: 20px;
-          // margin-left: 5px;
-          color: colors.$GRAY6;
-        }
-      }
-
       .categoryList {
         width: 280px;
-        height: 215px;
+        height: 150px;
         overflow-x: scroll;
 
         li {
@@ -142,7 +111,21 @@
           height: 40px;
           padding: 0 10px;
 
-          input {
+          .inputWrapper {
+            @include flexbox.flexbox(center center);
+            position: relative;
+
+            svg {
+              @include position.middleBox;
+              z-index: levels.$CHECK_ICON;
+              margin-left: 10px;
+              pointer-events: none;
+              opacity: 0;
+              transition: 0.2s;
+            }
+          }
+
+          input[type='radio'] {
             width: 15px;
             height: 15px;
             margin-left: 20px;
@@ -154,18 +137,27 @@
               width: 15px;
               height: 15px;
               margin-left: 20px;
-              background-color: rgb(25, 118, 248);
               -webkit-appearance: none;
               -moz-appearance: none;
               border: none;
               border-radius: 50%;
+
+              ~ svg {
+                opacity: 1;
+              }
             }
           }
 
           label {
+            position: relative;
+            margin-top: 3px;
             margin-left: 10px;
             font-size: 15px;
             color: colors.$GRAY6;
+
+            .checkedIcon {
+              position: absolute;
+            }
           }
         }
       }
