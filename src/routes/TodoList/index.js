@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { CheckIcon } from '../../assets/svgs'
 import styles from './TodoList.module.scss'
 
+/* addCategory */
+import AddCategory from '../../components/addCategoryModal/addCategoryModal'
+import AddCategoryModalSubmit from '../../components/addCategoryModal/addCategoryModalSubmit'
+/* addCategory */
+
 const INIT_TODO = [
   {
     id: 1,
@@ -21,6 +26,17 @@ const INIT_TODO = [
 ]
 
 function TodoList() {
+  /* addCategory */
+  const [modalOpen, setModalOpen] = useState(false)
+
+  function openModal() {
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+  /* addCategory */
+
   const [todoList, setTodoList] = useState(INIT_TODO)
 
   const handleAddClick = (e) => {
@@ -56,6 +72,15 @@ function TodoList() {
           ))}
         </ul>
         <button type='button' className={styles.addButton} onClick={handleAddClick} aria-label='Add button' />
+
+        {/* addCategory */}
+        <button type='button' onClick={openModal} aria-label='Add button'>
+          + Add Category
+        </button>
+        <AddCategory open={modalOpen} close={closeModal}>
+          <AddCategoryModalSubmit />
+        </AddCategory>
+        {/* addCategory */}
       </div>
     </div>
   )
