@@ -42,7 +42,7 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
     <div className={isShow ? styles.backBoard : styles.modalOff}>
       <div className={styles.main}>
         <div className={styles.closeBtnWrapper}>
-          <IoIosClose color="#A8A8A8" className={styles.closeBtn} onClick={close}/>
+          <IoIosClose color="#A8A8A8" className={styles.closeBtn} onClick={() => close(setColorList, setCategoryName, setMoreOn)}/>
         </div>
         <ul className={styles.colorCircleList} >
           {colorList.map((color) => 
@@ -64,8 +64,8 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
           <input type='text' value={categoryName} maxLength={20} placeholder={category.categoryName} onChange={categoryNameChangeHandler}/>
         </div>
         <div className={styles.btnsWrapper}>
-          <button type='button' className={styles.btn} onClick={() => edit(category.id, categoryName, selectColor, setCategory, setCategoryName )}>Edit</button>
-          <button type='button' className={styles.btn} onClick={() => remove(category.id, setCategory, setCategoryName)}>Delete</button>
+          <button type='button' className={styles.btn} onClick={() => edit(category.id, categoryName, selectColor, setCategory, setColorList, setCategoryName, setMoreOn )}>Edit</button>
+          <button type='button' className={styles.btn} onClick={() => remove(category.id, setCategory, setColorList, setCategoryName, setMoreOn)}>Delete</button>
         </div>
         { moreOn && 
         <div className={styles.colorPickerWrapper}>

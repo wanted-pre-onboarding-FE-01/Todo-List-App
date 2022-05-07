@@ -7,30 +7,45 @@ export const useEditCategoryModal = (nickName) => {
   const [isShow, setIsShow] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(INIT_CATEGORY)
 
+  const initSelect = (setColorList, setCategoryName, setMoreOn) => {
+    setColorList(prev => {
+      const data = [...prev]
+      data.forEach((category) => {
+        category.isCheck = false
+      })
+      return data
+    })
+    setCategoryName('')
+    setMoreOn(false)
+  }
+
   const open = (category) => {
     setIsShow(true)
     setSelectedCategory(category)
   }
 
-  const close = () => {
+  const close = (setColorList, setCategoryName, setMoreOn) => {
     setIsShow(false)
+    initSelect(setColorList, setCategoryName, setMoreOn)
   }
 
-  const edit = (id, newCategoryName, newColor, setCategory, setCategoryName) => {
+  const edit = (id, newCategoryName, newColor, setCategory, setColorList, setCategoryName, setMoreOn) => {
     editCategory(nickName, {id, newCategoryName, newColor})
     const storageData = getUserByNickName(nickName)
     setCategory(storageData.data.category)
-    setCategoryName('')
+    initSelect(setColorList, setCategoryName, setMoreOn)
     close()
   }
 
-  const remove = (categoryId, setCategory, setCategoryName) => {
+  const remove = (categoryId, setCategory, setColorList, setCategoryName, setMoreOn) => {
     removeCategory(nickName, categoryId)
     const storageData = getUserByNickName(nickName)
     setCategory(storageData.data.category)
-    setCategoryName('')
+    initSelect(setColorList, setCategoryName, setMoreOn)
     close()
   }
+
+  
 
   return [isShow, selectedCategory, open, close, edit, remove]
 }
