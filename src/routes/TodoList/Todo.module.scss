@@ -1,0 +1,119 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.task {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  line-height: 72px;
+  background-color: colors.$WHITE;
+  border-radius: 32px;
+  box-shadow: 0 10px 20px 0 rgba(colors.$BLACK, 2%);
+
+  &:hover {
+    height: 100%;
+
+    .dragIcon {
+      position: absolute;
+      display: block;
+      width: 20px;
+    }
+
+    .buttonWrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  + .task {
+    margin-top: 18px;
+  }
+
+  .checkboxWrapper {
+    @include flexbox.flexbox(center center);
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin: 0 24px;
+
+    .checkIcon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .notCheckedIcon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  input[type='checkbox'] {
+    @include position.middleBox;
+    z-index: levels.$CHECK_BOX;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s;
+
+    &:checked {
+      border: 0;
+    }
+  }
+
+  .titleWrapper {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .title {
+      overflow: hidden;
+      color: colors.$TASK_ITEM_TITLE;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lineThrough {
+      position: absolute;
+      top: 50%;
+      width: inherit;
+      height: 1px;
+      border-bottom: 1px solid black;
+      animation: border_anim 0.3s linear forwards;
+    }
+  }
+
+  .editIcon,
+  .deleteIcon {
+    width: 20px;
+    height: 20px;
+    line-height: 50%;
+    cursor: pointer;
+  }
+}
+
+@keyframes border_anim {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.dragIcon {
+  display: none;
+}
+
+.buttonWrapper {
+  display: none;
+}
