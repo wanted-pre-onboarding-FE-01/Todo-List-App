@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Todo from './Todo'
 import styles from './Todos.module.scss'
 import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
+import PropTypes from 'prop-types'
 
 import { cx } from '../../styles'
 import { SearchIcon } from '../../assets/svgs'
@@ -65,32 +66,7 @@ const DATA = [
   },
 ]
 
-function Todos() {
-  // 현재 로그인한 사용자 정보
-  const location = useLocation()
-  const { state } = location
-  // const { userId, isNewUser } = state
-
-  // const DATA = getAllData()
-  const currentLoginedUser = DATA.filter((data) => data.isLogined)[0]
-  const currentLoginedUserData = currentLoginedUser.data
-  const { category, todoList } = currentLoginedUserData
-
-  const [todoListState, setTodoListState] = useState(todoList)
-  // const USER_ID = getUserByUserId(TODO_LIST)
-
-  useEffect(() => {
-    // localStorage에 저장
-    DATA.forEach((data) => {
-      // console.log(data.id, data.data.todoList)
-      // if (data.id === userId) {
-      if (data.id === '1234sol') {
-        data.data.todoList = todoListState
-      }
-    })
-    updateAllData(DATA)
-  }, [todoListState])
-
+function Todos({ todoListState, setTodoListState, category }) {
   const handleAddClick = (e) => {
     // console.log('handleAddClick')
   }
@@ -187,3 +163,9 @@ function Todos() {
 }
 
 export default Todos
+
+Todos.propTypes = {
+  todoListState: PropTypes.arrayOf,
+  setTodoListState: PropTypes.func,
+  category: PropTypes.arrayOf,
+}
