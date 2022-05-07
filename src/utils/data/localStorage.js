@@ -55,3 +55,40 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
   })
   updateAllData(allData)
 }
+
+export const editCategory = (nickName, category) => {
+  const allData = getAllData()
+  const userData =  getUserByNickName(nickName)
+  userData.data.category.forEach((value) => {
+    if(value.id === category.id) {
+      value.categoryName = category.newCategoryName
+      value.color = category.newColor
+    }
+  })
+  allData.forEach((user) => {
+   if(user.userNickName === nickName) {
+      user.data = userData.data
+    }
+  })
+  updateAllData(allData)
+}
+
+export const removeCategory = (nickName, categoryId) => {
+  const allData = getAllData()
+  const userData = getUserByNickName(nickName)
+  // remove category
+  const categoryIndex = userData.data.category.findIndex((value) => value.id === categoryId)
+  userData.data.category.splice(categoryIndex, 1)
+  allData.forEach((user) => {
+    if(user.userNickName === nickName) {
+       user.data = userData.data
+     }
+  })
+  // remove todos
+  const willDeleteTodoList = userData.data.todoList.filter((todo) => todo.categoryId === categoryId)
+  willDeleteTodoList.forEach((willDeleteTodo) => {
+    const willDeleteTodoIndex = userData.data.todoList.findIndex((todo) => todo.id === willDeleteTodo.id)
+    userData.data.todoList.splice(willDeleteTodoIndex, 1)
+  })
+  updateAllData(allData)
+}
