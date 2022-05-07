@@ -162,24 +162,26 @@ function Todos() {
           <SearchIcon onClick={handleToggleSearchBar} />
         </div>
       </div>
-      {todoListState
-        .filter((todo) => {
-          if (!searchValue) {
-            return true
-          }
-          return todo.todo.includes(searchValue)
-        })
-        .map((todo) => (
-          <Todo
-            key={todo.id}
-            data-id={todo.id}
-            todoList={todo}
-            category={category}
-            handleChange={handleChange}
-            handleAddClick={handleAddClick}
-            handleDeleteClick={handleDeleteClick}
-          />
-        ))}
+      <div className={styles.todosWrapper}>
+        {todoListState
+          .filter((todo) => {
+            if (!searchValue) {
+              return true
+            }
+            return todo.todo.includes(searchValue)
+          })
+          .map((todo) => (
+            <Todo
+              key={todo.id}
+              data-id={todo.id}
+              todoList={todo}
+              category={category}
+              handleChange={handleChange}
+              handleAddClick={handleAddClick}
+              handleDeleteClick={handleDeleteClick}
+            />
+          ))}
+      </div>
     </ul>
   )
 }

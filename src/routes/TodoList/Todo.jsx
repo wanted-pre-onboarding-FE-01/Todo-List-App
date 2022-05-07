@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
 import styles from './Todo.module.scss'
+import { cx } from '../../styles'
 
 function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteClick }) {
   const { id, todo, categoryId, date, isDone } = todoList
@@ -9,7 +10,7 @@ function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteC
   // const [openEditModal]
 
   return (
-    <li key={id} className={styles.task} onClick={handleTodoClick} aria-hidden='true'>
+    <li key={id} className={cx(styles.task, isDone && styles.checked)} onClick={handleTodoClick} aria-hidden='true'>
       <div className={styles.checkboxWrapper}>
         <input type='checkbox' checked={isDone} data-id={id} onChange={handleChange} readOnly />
         {isDone ? (
