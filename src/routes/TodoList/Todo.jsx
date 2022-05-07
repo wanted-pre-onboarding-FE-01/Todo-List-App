@@ -1,20 +1,15 @@
 import PropTypes from 'prop-types'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
-import { FiEdit } from 'react-icons/fi'
-import { MdDragIndicator } from 'react-icons/md'
-import { RiDeleteBin5Fill } from 'react-icons/ri'
 import styles from './Todo.module.scss'
 
 function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteClick }) {
   const { id, todo, categoryId, date, isDone } = todoList
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  const todoCategoryColor = category.filter((category) => category.id === categoryId)[0].color
+  const todoCategoryColor = category.filter((todoCategory) => todoCategory.id === categoryId)[0].color
 
   // const [openEditModal]
 
   return (
     <li key={id} className={styles.task} onClick={handleTodoClick} aria-hidden='true'>
-      <MdDragIndicator className={styles.dragIcon} color='lightgray' />
       <div className={styles.checkboxWrapper}>
         <input type='checkbox' checked={isDone} data-id={id} onChange={handleChange} readOnly />
         {isDone ? (
@@ -32,11 +27,9 @@ function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteC
             <button className={styles.editButton} type='button'>
               Edit
             </button>
-            <button type='button' className={styles.deleteButton}>
+            <button type='button' className={styles.deleteButton} data-id={id} onClick={handleDeleteClick}>
               Delete
             </button>
-            {/* <FiEdit className={styles.editIcon} color='gray' />
-            <RiDeleteBin5Fill className={styles.deleteIcon} color='gray' data-id={id} onClick={handleDeleteClick} /> */}
           </div>
         )}
       </div>
