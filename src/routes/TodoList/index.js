@@ -1,50 +1,12 @@
 import { useState } from 'react'
-import { CheckIcon, SearchIcon } from '../../assets/svgs'
+import { SearchIcon } from '../../assets/svgs'
 import styles from './TodoList.module.scss'
 import { cx } from '../../styles'
 import { getUserByUserId } from '../../utils/data/localStorage'
 
-const INIT_TODO = [
-  {
-    id: 1,
-    todo: '계란 2판 사기',
-    isDone: false,
-    date: new Date(),
-    categoryId: 1,
-  },
-  {
-    id: 2,
-    todo: '맥북 프로 M1 Max CTO 버전 사기',
-    isDone: false,
-    date: new Date(),
-    categoryId: 1,
-  },
-  {
-    id: 3,
-    todo: '오늘의 TIL 작성하기',
-    isDone: false,
-    date: new Date(),
-    categoryId: 1,
-  },
-]
-
 function TodoList() {
-  const [todoList, setTodoList] = useState(INIT_TODO)
-
   const handleAddClick = () => {
     // console.log('handleAddClick')
-  }
-
-  const handleChange = (e) => {
-    const { dataset, checked } = e.currentTarget
-    const { id } = dataset
-
-    setTodoList((prev) => {
-      const targetIndex = prev.findIndex((todo) => todo.id === Number(id))
-      const newList = [...prev]
-      newList[targetIndex].done = checked
-      return newList
-    })
   }
 
   const [searchOpen, setSearchOpen] = useState(false)
@@ -84,13 +46,7 @@ function TodoList() {
               return todo.todo.includes(searchValue)
             })
             .map((todo) => (
-              <li key={`todo-${todo.id}`} className={styles.task}>
-                <div className={styles.checkboxWrapper}>
-                  <input type='checkbox' checked={todo.done} data-id={todo.id} onChange={handleChange} />
-                  <CheckIcon />
-                </div>
-                <p className={styles.title}>{todo.todo}</p>
-              </li>
+              <div key={todo.id}>{todo.todo}</div>
             ))}
         </ul>
         <button type='button' className={styles.addButton} onClick={handleAddClick} aria-label='Add button' />
