@@ -4,12 +4,24 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Categories from '../../components/Categories'
 import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
+import { CheckIcon } from '../../assets/svgs'
+import AddCategory from '../../components/addCategoryModal/addCategoryModal'
+import AddCategoryModalSubmit from '../../components/addCategoryModal/addCategoryModalSubmit'
 
 function TodoList() {
   // 현재 로그인한 사용자 정보
   const location = useLocation()
   const { state } = location
   // const { userId, isNewUser } = state
+
+  const [modalOpen, setModalOpen] = useState(false)
+
+  function openModal() {
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
+  }
 
   // const DATA = getAllData()
   const DATA = [
@@ -70,9 +82,17 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
+        <h1>Hi! this is your assignment.</h1>
         <Categories />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
-        <button type='button' className={styles.addButton} onClick={handleAddClick} aria-label='Add button' />
+        {/* addCategory */}
+        <button type='button' onClick={openModal} aria-label='Add button'>
+          + Add Category
+        </button>
+        <AddCategory open={modalOpen} close={closeModal}>
+          <AddCategoryModalSubmit />
+        </AddCategory>
+        {/* addCategory */}
       </div>
     </div>
   )

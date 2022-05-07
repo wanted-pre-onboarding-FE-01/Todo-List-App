@@ -3,6 +3,7 @@ import Calendar from './Calendar'
 import Login from './Login'
 import styles from './Routes.module.scss'
 import TodoList from './TodoList'
+import UpdateTodo from './UpdateTodo'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<TodoList />} />
           <Route path='/calendar' element={<Calendar />} />
+          <Route path='/updateTodo' element={<UpdateTodo />} />
         </Routes>
       </div>
     </div>
