@@ -28,8 +28,14 @@ function Todo({ todoList, category, handleTodoClick, handleChange, handleDeleteC
           <div className={styles.lineThrough} />
         ) : (
           <div className={styles.buttonWrapper}>
-            <FiEdit className={styles.editIcon} color='gray' />
-            <RiDeleteBin5Fill className={styles.deleteIcon} color='gray' data-id={id} onClick={handleDeleteClick} />
+            <button className={styles.editButton} type='button'>
+              Edit
+            </button>
+            <button type='button' className={styles.deleteButton}>
+              Delete
+            </button>
+            {/* <FiEdit className={styles.editIcon} color='gray' />
+            <RiDeleteBin5Fill className={styles.deleteIcon} color='gray' data-id={id} onClick={handleDeleteClick} /> */}
           </div>
         )}
       </div>
