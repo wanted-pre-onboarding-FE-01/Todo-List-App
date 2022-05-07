@@ -55,3 +55,9 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
   })
   updateAllData(allData)
 }
+
+export const getTodayTodosByNickName = (nickName) => {
+  const user = getUserByNickName(nickName)
+  const today = moment().format('YYYY/MM/DD')
+  return user.data.todoList.filter((todo) => todo.date === today)
+}
