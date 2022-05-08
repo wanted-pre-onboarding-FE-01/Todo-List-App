@@ -2,8 +2,13 @@ import styles from './TodoList.module.scss'
 import Todos from '../../components/Todo/Todos'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { CheckIcon } from '../../assets/svgs'
 import Categories from '../../components/Categories'
+
 import { getIsLoginedUserByUserId, getTodayTodosByUserId, getTodayTodosByNickName, getCategoryByNickNameAndCategoryId, getPastTodosByNickName, updateTodosByUserId } from '../../utils/data/localStorage'
+
+/* addCategory */
+
 import AddCategory from '../../components/addCategoryModal/addCategoryModal'
 import AddCategoryModalSubmit from '../../components/addCategoryModal/addCategoryModalSubmit'
 import PastTodoModal from '../../components/PastTodoModal'
@@ -24,7 +29,7 @@ function TodoList() {
 
   const [modalOpen, setModalOpen] = useState(false)
 
-  function openModal() {
+  const openModal = () => {
     setModalOpen(true)
   }
   const closeModal = () => {

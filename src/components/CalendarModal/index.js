@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import styles from './CalendarModal.module.scss'
 import { ModalCalendarIcon, ModalCheckIcon, ModalTrashIcon } from '../../assets/svgs'
 
-// modalState 대신에 userNickName 받아올 것
 const CalendarModal = function CalendarModal({ nickName, setModalState, todo, category }) {
   const handleCloseModal = () => {
     setModalState(false)
@@ -16,7 +15,6 @@ const CalendarModal = function CalendarModal({ nickName, setModalState, todo, ca
     setModalState(false)
   }
 
-  // changeDateFormat '/' to '-'
   const changeDateFormat = (date) => {
     const changedFormatDate = date.split('/').join('-')
     return changedFormatDate
@@ -44,7 +42,7 @@ const CalendarModal = function CalendarModal({ nickName, setModalState, todo, ca
             <ModalCheckIcon />
           </button>
           <button type='button'>
-            <Link to='/updateTodo'>
+            <Link to='/updateTodo' state={{ todo, beforePage: '/calendar', modify: true }}>
               <ModalCalendarIcon />
             </Link>
           </button>
@@ -71,20 +69,3 @@ CalendarModal.propTypes = {
 }
 
 export default CalendarModal
-
-// {
-//   /* 버튼은 그려야할 지 말아야할 지 여쭤보기 */
-// }
-// {
-//   /* <button
-//           type='button'
-//           className={styles.closeModalButton}
-//           aria-label='close Button'
-//           onClick={handleCloseModal}
-//         /> */
-// }
-
-// 동적으로 css 값을 다루는 방법이 있을까요??(색상 변경하는 방법 여쭤보기)
-// 1. inline - stying은 성능에 좋지 않다.
-// 2. 아래의 방법을 써도 괜찮은가??
-// https://www.section.io/engineering-education/dynamically-update-react-and-javascript-with-css-variables/
