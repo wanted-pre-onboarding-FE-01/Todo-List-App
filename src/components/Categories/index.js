@@ -12,10 +12,7 @@ import { getUserByUserId, updateAllData, getAllData } from '../../utils/data/loc
 import EditCategoryModal from '../EditCategoryModal/index'
 import { useEditCategoryModal } from '../../hooks/EditCategoryModal'
 
-function Categories({ userId, nickName, setTodoListState }) {
-  //   const location = useLocation()
-  //   const { userId, isNewUser } = location.state
-  const isNewUser = false // user dummy data
+function Categories({ userId, isNewUser, nickName, setTodoListState }) {
   const loginUserId = userId
   const [userNickName, setUserNickName] = useState('')
   const [todoList, setTodoList] = useState([])
@@ -29,7 +26,7 @@ function Categories({ userId, nickName, setTodoListState }) {
 
   const sliderSettings = {
     dots: false,
-    infinite: categoryArray?.length > 2,
+    infinite: categoryArray?.length > 3,
     arrows: false,
     speed: 1000,
     slidesToShow: 2,
@@ -173,6 +170,7 @@ function Categories({ userId, nickName, setTodoListState }) {
 
 Categories.propTypes = {
   userId: PropTypes.string.isRequired,
+  isNewUser: PropTypes.bool.isRequired,
   nickName: PropTypes.string.isRequired,
   setTodoListState: PropTypes.func.isRequired,
 }

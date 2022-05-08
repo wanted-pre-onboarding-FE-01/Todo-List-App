@@ -31,8 +31,9 @@ function TodoList() {
    * 로그인 페이지 연결하면서 주석 해제하여 사용하도록 합니다.
    * newUser일 경우에 대한 35라인 getIsLoginedUserByUserId(..) 호출에 분기를 추가해야합니다.
    */
+  const { userId, isNewUser } = state
 
-  const userId = '1234sol'
+  // const userId = '1234sol'
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -64,7 +65,12 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <Categories userId={userId} nickName={currentLoginedUser.userNickName} setTodoListState={setTodoListState} />
+        <Categories
+          userId={userId}
+          isNewUser={isNewUser}
+          nickName={currentLoginedUser.userNickName}
+          setTodoListState={setTodoListState}
+        />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
         <PastTodoModal
           isShow={isShow}
