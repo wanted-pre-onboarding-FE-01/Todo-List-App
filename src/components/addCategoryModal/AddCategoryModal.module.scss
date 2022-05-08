@@ -1,7 +1,7 @@
-@use "/src/styles/constants/colors";
-@use "/src/styles/constants/levels";
-@use "/src/styles/mixins/flexbox";
-@use "/src/styles/mixins/position";
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
 
 .openModal {
   @include position.middleBox;
@@ -24,7 +24,7 @@
 
     .innerModal {
       position: relative;
-      padding: 30px 20px;
+      padding: 60px 20px;
 
       .close {
         position: absolute;
@@ -75,10 +75,15 @@
           border-radius: 50%;
         }
 
-        $colors: (1: colors.$CRED, 2: colors.$CORANGE, 3: colors.$CYELLOW, 4: colors.$CGREEN, 5: colors.$CBLUE);
+        $colors: (
+          1: colors.$CRED,
+          2: colors.$CORANGE,
+          3: colors.$CYELLOW,
+          4: colors.$CGREEN,
+          5: colors.$CBLUE,
+        );
 
-        @each $key,
-        $color in $colors {
+        @each $key, $color in $colors {
           :nth-child(#{$key}) {
             background-color: #{$color};
           }
@@ -120,11 +125,11 @@
           @include position.middleBox;
           cursor: pointer;
           content: '';
-          background: colors.$GRAYA;
-          user-select: none;
           -webkit-user-select: none;
-          -webkit-touch-callout: none;
+          user-select: none;
           -ms-user-select: none;
+          background: colors.$GRAYA;
+          -webkit-touch-callout: none;
         }
 
         .hiddenBox::before {

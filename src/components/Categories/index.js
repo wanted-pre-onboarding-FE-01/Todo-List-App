@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import AddCategoryModalSubmit from '../addCategoryModal/addCategoryModalSubmit'
 // import ModalAddCategory from '../ModalAddCategory'
 import styles from './Categories.module.scss'
 import Slider from 'react-slick'
@@ -147,9 +147,13 @@ function Categories() {
           </button>
         </Slider>
       </div>
-      {/* {showModal && (
-        <ModalAddCategory showModal={showModal} handleClickClose={handleClickClose} handleClickAdd={handleClickAdd} />
-      )} */}
+      {showModal && (
+        <AddCategoryModalSubmit
+          showModal={showModal}
+          handleClickClose={handleClickClose}
+          handleClickAdd={handleClickAdd}
+        />
+      )}
     </div>
   )
 }

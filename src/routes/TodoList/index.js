@@ -2,9 +2,10 @@ import styles from './TodoList.module.scss'
 import Todos from '../../components/Todo/Todos'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { CheckIcon } from '../../assets/svgs'
 import Categories from '../../components/Categories'
 import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
-import { CheckIcon } from '../../assets/svgs'
+/* addCategory */
 import AddCategory from '../../components/addCategoryModal/addCategoryModal'
 import AddCategoryModalSubmit from '../../components/addCategoryModal/addCategoryModalSubmit'
 
@@ -13,17 +14,16 @@ function TodoList() {
   const location = useLocation()
   const { state } = location
   // const { userId, isNewUser } = state
-
+  // const DATA = getAllData()
+  /* addCategory */
   const [modalOpen, setModalOpen] = useState(false)
 
-  function openModal() {
+  const openModal = () => {
     setModalOpen(true)
   }
   const closeModal = () => {
     setModalOpen(false)
   }
-
-  // const DATA = getAllData()
   const DATA = [
     {
       id: '1234sol',
@@ -82,12 +82,14 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <Categories />
+        <Categories
+          currentLoginedUser={currentLoginedUser}
+          todoListState={todoListState}
+          setTodoListState={setTodoListState}
+          category={category}
+        />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
-        <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
-        <AddCategory open={modalOpen} close={closeModal}>
-          <AddCategoryModalSubmit />
-        </AddCategory>
+        <button type='button' className={styles.addButton} onClick={handleAddClick} aria-label='Add button' />
       </div>
     </div>
   )
