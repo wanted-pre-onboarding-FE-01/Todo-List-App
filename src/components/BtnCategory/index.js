@@ -42,8 +42,8 @@ BtnCategory.propTypes = {
       })
     })
   ),
-  selectCategoryName: PropTypes.func.isRequired,
-  selectCategoryColor: PropTypes.func.isRequired
+  selectCategoryName: PropTypes.string.isRequired,
+  selectCategoryColor: PropTypes.string.isRequired
 }
 
 export default BtnCategory

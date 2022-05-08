@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import AddCategoryModalSubmit from '../addCategoryModal/addCategoryModalSubmit'
+import AddCategoryModalSubmit from '../AddCategoryModal/addCategoryModalSubmit'
 import styles from './Categories.module.scss'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -20,7 +20,7 @@ function Categories({ userId, isNewUser, nickName, setTodoListState }) {
   const [categoryIdArray, setCategoryIdArray] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [category, setCategory] = useState([])
-  let array = []
+  const array = []
 
   const [isShow, selectedCategory, open, close, edit, remove] = useEditCategoryModal(nickName)
 
@@ -84,9 +84,9 @@ function Categories({ userId, isNewUser, nickName, setTodoListState }) {
 
   const updateTodoList = (uniqueId, selectedColor, categoryName) => {
     todoList.data.category.push({
-      ['id']: uniqueId,
-      ['categoryName']: categoryName,
-      ['color']: selectedColor,
+      'id': uniqueId,
+      'categoryName': categoryName,
+      'color': selectedColor,
     })
     setCategoryInLocalStorage()
   }
@@ -96,9 +96,9 @@ function Categories({ userId, isNewUser, nickName, setTodoListState }) {
     setCategory((prev) => [
       ...prev,
       {
-        ['id']: uniqueId,
-        ['categoryName']: categoryName,
-        ['color']: selectedColor,
+        'id': uniqueId,
+        'categoryName': categoryName,
+        'color': selectedColor,
       },
     ])
     setCategoryIdArray((prev) => [...prev, uniqueId])

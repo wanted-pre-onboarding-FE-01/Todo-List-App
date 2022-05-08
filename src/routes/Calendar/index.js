@@ -47,7 +47,7 @@ function Calendar() {
   }
 
   const navigateHandler = () => {
-    navigate('/')
+    navigate('/', { state: { userId: schedule.id, isNewUser: false } })
   }
 
   const Day = () => {

@@ -12,7 +12,7 @@ import BtnClose from '../../components/BtnClose'
 
 const strData = localStorage.getItem('todo')
 const data = JSON.parse(strData)
-const nickName = data[0].userNickName
+const nickName = data ? data[0].userNickName : ''
 
 function UpdateTodo() {
   const location = useLocation()
@@ -43,10 +43,10 @@ function UpdateTodo() {
   }
 
   const handleClickCategoryBtn = () => {
-    setBoxOpen(prev => !prev)
+    setBoxOpen((prev) => !prev)
   }
 
-  const handleChangeInput = e => {
+  const handleChangeInput = (e) => {
     setNewTask(e.currentTarget.value)
   }
 
@@ -54,37 +54,38 @@ function UpdateTodo() {
     <>
       <BtnClose handleClickClose={handleClickClose} />
       <section className={styles.textWrapper}>
-        <input 
-          type='text' 
-          placeholder='Enter new task.' 
-          defaultValue={todo ? todo.todo : ''} 
+        <input
+          type='text'
+          placeholder='Enter new task.'
+          defaultValue={todo ? todo.todo : ''}
           onChange={handleChangeInput}
         />
       </section>
       <main className={styles.selectedWrapper}>
         <div className={styles.selectedBtnsWrapper}>
           <BtnCalendar getDate={getDate} forUpdateDate={todo ? todo.date : moment().format('YYYY/MM/DD')} />
-          <BtnCategory 
+          <BtnCategory
             handleClickCategoryBtn={handleClickCategoryBtn}
             todo={todo}
             data={data}
             selectCategoryName={selectCategoryName}
-            selectCategoryColor={selectCategoryColor} 
+            selectCategoryColor={selectCategoryColor}
           />
         </div>
         <div className={styles.selectedListWrapper}>
-          {isBoxOpen && 
-            <Box 
-              setBoxOpen={setBoxOpen} 
+          {isBoxOpen && (
+            <Box
+              setBoxOpen={setBoxOpen}
               data={data}
               setSelectCategoryName={setSelectCategoryName}
               setSelectCategoryColor={setSelectCategoryColor}
-            />}
+            />
+          )}
         </div>
       </main>
-      <BtnTask 
-        modify={modify} 
-        nickName={nickName} 
+      <BtnTask
+        modify={modify}
+        nickName={nickName}
         todo={todo}
         navigate={navigate}
         beforePage={beforePage}

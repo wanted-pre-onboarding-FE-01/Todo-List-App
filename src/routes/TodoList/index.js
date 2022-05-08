@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Categories from '../../components/Categories'
 import PastTodoModal from '../../components/PastTodoModal'
 import Todos from '../../components/Todo/Todos'
@@ -70,7 +70,10 @@ function TodoList() {
           submit={submit}
           getCategoryByNickNameAndId={getCategoryByNickNameAndCategoryId}
         />
-        <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
+        <Link to='/updateTodo' state={{todoListState, todoList, beforePage: '/calendar', modify: false }}>
+          <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
+        </Link>
+        {/* <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' /> */}
       </div>
     </div>
   )
