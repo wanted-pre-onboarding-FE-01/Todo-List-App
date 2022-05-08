@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import AddCategoryModalSubmit from '../addCategoryModal/addCategoryModalSubmit'
 
 // import ModalAddCategory from '../ModalAddCategory'
 import styles from './Categories.module.scss'
@@ -13,11 +14,11 @@ import { getUserByUserId, updateAllData, getAllData } from '../../utils/data/loc
 import EditCategoryModal from '../EditCategoryModal/index'
 import { useEditCategoryModal } from '../../hooks/EditCategoryModal'
 
-function Categories({setTodoListState}) {
+function Categories({userId, nickName, setTodoListState}) {
   //   const location = useLocation()
   //   const { userId, isNewUser } = location.state
   const isNewUser = false // user dummy data
-  const loginUserId = '1234sol'
+  const loginUserId = userId
   const [userNickName, setUserNickName] = useState('')
   const [todoList, setTodoList] = useState([])
   const [categoryArray, setCategoryArray] = useState([])
@@ -26,7 +27,7 @@ function Categories({setTodoListState}) {
   const [category, setCategory] = useState([])
   let array = []
 
-  const [isShow, selectedCategory, open, close, edit, remove] = useEditCategoryModal ('sol')
+  const [isShow, selectedCategory, open, close, edit, remove] = useEditCategoryModal (nickName)
 
   const sliderSettings = {
     dots: false,
@@ -170,6 +171,8 @@ function Categories({setTodoListState}) {
 }
 
 Categories.propTypes = {
+  userId: PropTypes.string.isRequired,
+  nickName: PropTypes.string.isRequired,
   setTodoListState: PropTypes.func.isRequired,
 }
 

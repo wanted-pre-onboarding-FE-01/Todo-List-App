@@ -43,8 +43,7 @@ function TodoList() {
 
   useEffect(() => {
     updateTodosByUserId(userId, todoListState)
-    getTodayTodosByNickName(currentLoginedUser.userNickName)
-  }, [todoListState, currentLoginedUser.userNickName])
+  }, [todoListState])
 
   const handleAddClick = () => {
     // console.log('handleAddClick')
@@ -53,7 +52,7 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <Categories setTodoListState={setTodoListState}/>
+        <Categories userId={userId} nickName={currentLoginedUser.userNickName} setTodoListState={setTodoListState}/>
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
         <PastTodoModal isShow={isShow} data={getPastTodosByNickName(currentLoginedUser.userNickName)} nickName={currentLoginedUser.userNickName} close={close} submit={submit} getCategoryByNickNameAndId={getCategoryByNickNameAndCategoryId} />
         <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
