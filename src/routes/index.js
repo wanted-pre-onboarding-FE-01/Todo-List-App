@@ -14,7 +14,7 @@ function App() {
     <div className={styles.app}>
       <div className={styles.container}>
         <Routes>
-          <Route path='/login' element={<Login userNcurrentUserNameames={currentUserName} setCurrentUserName={setCurrentUserName} />} />
+          <Route path='/login' element={<Login currentUserName={currentUserName} setCurrentUserName={setCurrentUserName} />} />
           <Route path='/' element={ currentUserName !== null ? <TodoList /> : <Navigate to='/login' />} />
           <Route path='/calendar' element={<Calendar />} />
           <Route path='/updateTodo' element={<UpdateTodo />} />
