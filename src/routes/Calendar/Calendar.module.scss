@@ -39,6 +39,19 @@
   width: 100%;
   text-align: left;
 
+  td + div {
+    margin-bottom: 5px;
+  }
+
+  div {
+    max-width: 50px;
+    margin-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
   td,
   th {
     width: calc(100% / 7);

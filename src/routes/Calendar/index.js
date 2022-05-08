@@ -3,7 +3,6 @@ import moment from 'moment'
 import 'moment/locale/ko'
 import { useEffect, useState } from 'react'
 import cn from 'classnames'
-import { data } from './mockdata'
 import { useNavigate } from 'react-router-dom'
 import CalendarModal from '../../components/CalendarModal'
 
@@ -29,23 +28,21 @@ function Calendar() {
       ))
   }
 
-  localStorage.setItem('todo', JSON.stringify(data))
-
   useEffect(() => {
-    const todo = JSON.parse(localStorage.getItem('todo'))
+    const todoList = JSON.parse(localStorage.getItem('todo'))
 
-    const loginUser = todo.find((el) => el.isLogined)
+    const loginUser = todoList.find((el) => el.isLogined)
 
     setSchedule(loginUser)
   }, [])
 
   const getCategoryInfo = (categoryId) => {
-    return schedule.data.category.find((category) => category.id === categoryId)
+    return schedule.data.category.find((item) => item.id === categoryId)
   }
 
-  const clickHandler = (category, todo) => {
-    setCategory(category)
-    setTodo(todo)
+  const clickHandler = (categoryName, todoName) => {
+    setCategory(categoryName)
+    setTodo(todoName)
     setModalState(true)
   }
 
@@ -66,23 +63,24 @@ function Calendar() {
             .map((_, i) => {
               const days = date.clone().week(week).startOf('week').add(i, 'day')
               const isToday = today.format('YYYYMMDD') === days.format('YYYYMMDD')
-              const todayTodo = schedule?.data?.todoList.filter((todo) => todo.date === days.format('YYYY/MM/DD'))
+              const todayTodo = schedule?.data?.todoList.filter((item) => item.date === days.format('YYYY/MM/DD'))
 
               return (
                 <td className={cn({ [styles.today]: isToday })} key={`days_${i}`}>
                   {days.format('D')}
-                  {todayTodo?.map((todo) => {
-                    const category = getCategoryInfo(todo.categoryId)
+                  {todayTodo?.map((item) => {
+                    const getCategory = getCategoryInfo(item.categoryId)
 
                     return (
-                      <button
-                        type='button'
-                        key={todo.id}
-                        onClick={() => clickHandler(category, todo)}
-                        style={{ backgroundColor: category.color }}
+                      <div
+                        role='button'
+                        tabIndex={0}
+                        key={item.id}
+                        onClick={() => clickHandler(getCategory, item)}
+                        style={{ backgroundColor: getCategory.color }}
                       >
-                        {todo.todo}
-                      </button>
+                        {item.todo}
+                      </div>
                     )
                   })}
                 </td>
