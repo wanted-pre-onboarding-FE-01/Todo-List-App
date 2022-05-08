@@ -13,9 +13,9 @@ export default function Modalsubmit() {
   ]
 
   function handleForm(event) {
-    event.preventDefault() // 콘솔출력용
-    console.log(`${event.target.categoryName.value}`)
-    console.log(`${event.target.color.value}`)
+    // event.preventDefault() // 콘솔출력용
+    // console.log(`${event.target.categoryName.value}`)
+    // console.log(`${event.target.color.value}`)
     event.target.categoryName.value = '' // flushes the categoryName value
     event.target.color.value = '#ffffff' // flushes the color value
   }
