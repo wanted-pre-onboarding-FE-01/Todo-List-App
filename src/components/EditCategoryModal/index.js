@@ -4,12 +4,12 @@ import { IoIosClose } from 'react-icons/io'
 import { useRef, useState } from "react"
 import { HexColorPicker } from "react-colorful"
 import { useColorPicker } from "../../hooks/ColorPicker"
-import  useOnClickOutside  from '../../hooks/useClickOutside'
+// import  useOnClickOutside  from '../../hooks/useClickOutside'
 
 const BRIEF_COLOR_LIST = [ 
   { color: '#d4697b', isCheck: false }, { color: '#d27a56', isCheck: false }, { color: '#d1a345', isCheck: false }, { color: '#53a787', isCheck: false },{ color: '#566dda', isCheck: false }]
 
-function EditCategoryModal({ isShow, category, close, edit, remove, setCategory }) {
+function EditCategoryModal({ isShow, category, close, edit, remove, setCategory, setTodoListState }) {
   
   const [colorList, setColorList] = useState(BRIEF_COLOR_LIST)
   
@@ -28,7 +28,7 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
   }
 
   const modalRef = useRef()
-  useOnClickOutside(modalRef, ()  => close(setColorList, setCategoryName, setMoreOn))
+  // useOnClickOutside(modalRef, ()  => close(setColorList, setCategoryName, setMoreOn))
 
   const [selectColor, setSelectColor] = useState(category.color)
 
@@ -68,8 +68,8 @@ function EditCategoryModal({ isShow, category, close, edit, remove, setCategory 
           <input type='text' value={categoryName} maxLength={15} placeholder={category.categoryName} onChange={categoryNameChangeHandler}/>
         </div>
         <div className={styles.btnsWrapper}>
-          <button type='button' className={styles.btn} onClick={() => edit(category.id, categoryName, selectColor, setCategory, setColorList, setCategoryName, setMoreOn )}>Edit</button>
-          <button type='button' className={styles.btn} onClick={() => remove(category.id, setCategory, setColorList, setCategoryName, setMoreOn)}>Delete</button>
+          <button type='button' className={styles.btn} onClick={() => edit(category.id, categoryName, selectColor, setCategory, setColorList, setCategoryName, setMoreOn, setTodoListState )}>Edit</button>
+          <button type='button' className={styles.btn} onClick={() => remove(category.id, setCategory, setColorList, setCategoryName, setMoreOn, setTodoListState)}>Delete</button>
         </div>
         { moreOn && 
         <div className={styles.colorPickerWrapper}>
@@ -92,6 +92,7 @@ EditCategoryModal.propTypes = {
   edit: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
   setCategory: PropTypes.func.isRequired,
+  setTodoListState: PropTypes.func.isRequired,
 }
 
 export default EditCategoryModal

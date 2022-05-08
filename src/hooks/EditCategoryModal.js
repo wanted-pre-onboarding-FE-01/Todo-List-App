@@ -29,17 +29,19 @@ export const useEditCategoryModal = (nickName) => {
     initSelect(setColorList, setCategoryName, setMoreOn)
   }
 
-  const edit = (id, newCategoryName, newColor, setCategory, setColorList, setCategoryName, setMoreOn) => {
+  const edit = (id, newCategoryName, newColor, setCategory, setColorList, setCategoryName, setMoreOn, setTodoListState) => {
     editCategory(nickName, {id, newCategoryName, newColor})
     const storageData = getUserByNickName(nickName)
     setCategory(storageData.data.category)
+    setTodoListState(storageData.data.todoList)
     close(setColorList, setCategoryName, setMoreOn)
   }
 
-  const remove = (categoryId, setCategory, setColorList, setCategoryName, setMoreOn) => {
+  const remove = (categoryId, setCategory, setColorList, setCategoryName, setMoreOn, setTodoListState) => {
     removeCategory(nickName, categoryId)
     const storageData = getUserByNickName(nickName)
     setCategory(storageData.data.category)
+    setTodoListState(storageData.data.todoList)
     close(setColorList, setCategoryName, setMoreOn)
   }
 
