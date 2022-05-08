@@ -1,0 +1,192 @@
+@use "/src/styles/constants/colors";
+@use "/src/styles/constants/levels";
+@use "/src/styles/mixins/flexbox";
+@use "/src/styles/mixins/position";
+
+.openModal {
+  @include position.middleBox;
+  z-index: levels.$MODAL;
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 720px;
+  background-color: colors.$MODAL_MASK;
+  border-radius: 60px;
+  animation: modalBgShow ease 0.2s;
+
+  .outerModal {
+    width: 280px;
+    height: 300px;
+    margin: 0 auto;
+    background-color: colors.$WHITE;
+    border-radius: 30px;
+    animation: modalShow ease 0.2s;
+
+    .innerModal {
+      position: relative;
+      padding: 30px 20px;
+
+      .close {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 18px;
+        height: 18px;
+        color: colors.$GRAY6;
+
+        &::before,
+        &::after {
+          position: absolute;
+          content: '';
+          background: colors.$GRAYA;
+          transform: rotate(45deg);
+        }
+
+        &::before {
+          top: -4px;
+          width: 1px;
+          height: 25px;
+        }
+
+        &::after {
+          top: 8px;
+          right: -4px;
+          width: 25px;
+          height: 1px;
+        }
+      }
+    }
+
+    .formStyle {
+      position: relative;
+      top: 15px;
+      height: 180px;
+      padding: 0 20px;
+
+      .colorPalette {
+        z-index: 10000;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .colorPrepare {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+        }
+
+        $colors: (1: colors.$CRED, 2: colors.$CORANGE, 3: colors.$CYELLOW, 4: colors.$CGREEN, 5: colors.$CBLUE);
+
+        @each $key,
+        $color in $colors {
+          :nth-child(#{$key}) {
+            background-color: #{$color};
+          }
+        }
+
+        .hiddenBox {
+          position: relative;
+          width: 28px;
+          height: 28px;
+          overflow: hidden;
+          border: 1px solid colors.$GRAYA;
+          border-radius: 50%;
+
+          .colorPicker {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            width: 235px;
+            height: 50px;
+            cursor: pointer;
+          }
+
+          input[type='color'] {
+            -webkit-appearance: none;
+            border-radius: 50%;
+          }
+
+          input[type='color']::-webkit-color-swatch-wrapper {
+            padding: 0;
+          }
+
+          input[type='color']::-webkit-color-swatch {
+            border: none;
+          }
+        }
+
+        .hiddenBox::before,
+        .hiddenBox::after {
+          @include position.middleBox;
+          cursor: pointer;
+          content: '';
+          background: colors.$GRAYA;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          -ms-user-select: none;
+        }
+
+        .hiddenBox::before {
+          z-index: 1;
+          width: 1px;
+          height: 10px;
+        }
+
+        .hiddenBox::after {
+          width: 10px;
+          height: 1px;
+        }
+      }
+
+      .categoryName {
+        @include position.posCenterX;
+        bottom: 80px;
+        width: 160px;
+        height: 40px;
+        font-size: 1rem;
+        color: colors.$BLACK;
+        text-align: center;
+        border-bottom: 1px solid colors.$GRAYA;
+      }
+
+      .submitButton {
+        @include position.posCenterX;
+        bottom: 0;
+        width: 115px;
+        height: 46px;
+        font-weight: 600;
+        color: colors.$TODO_THEME;
+        cursor: pointer;
+        border: 1px solid colors.$TODO_THEME;
+        border-radius: 30px;
+        transition: all ease 0.2s;
+
+        &:hover {
+          color: colors.$WHITE;
+          background-color: colors.$TODO_THEME;
+        }
+      }
+    }
+  }
+}
+
+@keyframes modalShow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalBgShow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
