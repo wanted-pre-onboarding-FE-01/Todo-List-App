@@ -4,6 +4,8 @@ import 'moment/locale/ko'
 import { useEffect, useState } from 'react'
 import cn from 'classnames'
 import { data } from './mockdata'
+import { useNavigate } from 'react-router-dom'
+import CalendarModal from '../../components/CalendarModal'
 
 function Calendar() {
   const [schedule, setSchedule] = useState({})
@@ -12,6 +14,7 @@ function Calendar() {
   const [todo, setTodo] = useState({})
   const [category, setCategory] = useState({})
   const today = moment()
+  const navigate = useNavigate()
 
   const firstWeek = date.clone().startOf('month').week()
   const lastWeek = date.clone().endOf('month').week() === 1 ? 53 : date.clone().endOf('month').week()
@@ -44,6 +47,10 @@ function Calendar() {
     setCategory(category)
     setTodo(todo)
     setModalState(true)
+  }
+
+  const navigateHandler = () => {
+    navigate('/')
   }
 
   const Day = () => {
@@ -95,8 +102,9 @@ function Calendar() {
   return (
     <div className={styles.calendarWrapper}>
       <div className={styles.header}>
-        <div>🏠</div>
-        <div>🗓</div>
+        <button type='button' onClick={navigateHandler}>
+          🏠
+        </button>
       </div>
       <div className={styles.display}>
         <button onClick={buttonHandler} name='Y' value={-1} type='button'>
@@ -123,7 +131,9 @@ function Calendar() {
           <Day />
         </tbody>
       </table>
-      {/* {modalState && <Modal modalState={modalState} setModalState={setModalState} todo={todo} category={category} />} */}
+      {modalState && (
+        <CalendarModal nickname={schedule.userNickName} setModalState={setModalState} todo={todo} category={category} />
+      )}
     </div>
   )
 }
