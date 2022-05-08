@@ -1,70 +1,252 @@
-# Getting Started with Create React App
+# TodoList (할일관리 앱)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 프로젝트 시작
 
-## Available Scripts
+```bash
+npm install
 
-In the project directory, you can run:
+npm start
+```
 
-### `npm start`
+### 팀원
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+강도희 김민효 박솔찬 신가은 이다슬 이우성 전해강 정규재 정선미 홍선영
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 구현 사항
 
-### `npm test`
+## 1. 로그인 페이지
+<img width="181" alt="스크린샷 2022-05-08 오후 5 09 28" src="https://user-images.githubusercontent.com/79626675/167290304-7027195e-f5bc-4827-bb90-937556da8481.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 컴포넌트 설명
+    - 닉네임을 통해 로그인을 할 수 있도록 로그인페이지 구현
+2. 기능 설명
+    - 닉네임 로그인 시 유효성 검사 (영어, 한글만 가능 15자미만)
+    - 신규 유저일때, 기존 유저일때 나눠서 로컬스토리지에 다른 조건으로 저장, 유저 정보 메인 페이지로 전달
 
-### `npm run build`
+### 2. 메인 페이지
+![7](https://user-images.githubusercontent.com/79626675/167290340-7329231e-52e7-4717-a16a-ee5a925cc2c4.jpeg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![6](https://user-images.githubusercontent.com/79626675/167290342-28093d2d-479f-491d-8029-95efa07a2051.jpeg)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/79626675/167290372-34760f2c-4745-4243-b806-d72246a680e9.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![4](https://user-images.githubusercontent.com/79626675/167290373-70f6f9fc-05ca-4dca-a322-373338442a27.jpeg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+![Untitled](https://user-images.githubusercontent.com/79626675/167290378-8c9c6090-708e-4a71-8958-02b0bad324e3.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. 타이틀 및 카테고리
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+기능 설명
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 신규/기존 유저여부와 로그인유저 닉네임을 로그인 페이지로부터 넘겨받아, Welcome/What’s up 및 닉네임 표시
+- 캘린더 클릭시 달력페이지로 이동
+- 카테고리 추가 클릭시 모달로부터 데이터를 넘겨받아 지정한 이름의 카테고리 버튼 생성
+- 각 카테고리별 총 TODO의 개수, 카테고리명, 달성률 프로그레스바 표시
+- 카테고리 슬라이드
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. 투두 리스트
 
-## Learn More
+컴포넌트 및 기능 설명
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- TodoList : 현재 로그인 된 유저의 투두 리스트 Todos 컴포넌트에 전달
+- Todos : 현재 날짜로 설정된 todo list 렌더링, 검색
+- Todo :  todo done 체크 시 최하단으로 이동, 수정 버튼 클릭시 창 이동, 삭제 기능
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. 카테고리 추가 (모달)
+    
+- 컴포넌트 설명
+    
+    - addCategoryModal : Modal 창 오픈, 생성, 닫기 구현
+    - addCategoryModalSubmit : Modal 창 내부 form 구현
+        - color : `button`, `input type=’color’`을 통해  color 선택 및 추가
+        - categoryName : `input type='text'`을 통해 입력
+    
+ - 기능 설명
+    
+    - 카테고리 추가 시 Modal 창 열림
+    - Modal 창 내부에서 form을 통해 카테고리 색상, 이름 입력
+    - 5개의 기본 색상 제공, 기본 색상 외 커스텀 색상 선택 가능
+    - 카테고리 이름 입력 (최대 15자 입력가능)
+    - form 입력 후 Add 클릭하면 입력받은 데이터 넘기고 입력값 초기화
+    - X 버튼 클릭하면 Modal 창 닫음
 
-### Code Splitting
+1. 카테고리 수정 삭제 (모달)
+  - 컴포넌트 설명
+        - 카테고리 리스트에서 카테고리를 선택하면 카테고리를 수정 삭제 할 수 있는 모달 오픈
+        - 선택된 카테고리를 Delete 버튼을 통해 삭제할 수 있습니다.
+        - 컬러와 새로운 카테고리 명을 입력 받아 변경 가능하다.
+        - 기본적으로 5개의 색상을 제공하며, 컬러 피커를 통해 추가로 컬러를 선택 할 수 있다.
+  - 기능 설명
+        - 메인화면에서 카테고리 선택 시, 모달창 오픈
+        - + 버튼을 통해 사용자 지정 및 OK 버튼 클식 시 컬리 리스트에 색 추가
+        - Edit 버튼을 클릭  시, 해당 카테고리의 정보가 수정
+        - Delete 버튼 클릭 시, 해당 카테고리가 삭제되며 해당 카테고리와 연결되어 있는 모든 투두 삭제
+        
+2. 미수행 지난 투두 관리 (모달)
+- 컴포넌트 설명
+        - 오늘보다 이전에 수행하지 않은 투두가 존재한다면 메인페이지에서 기본적으로 지난 투두를 관리할 수 있는 모달 오픈
+        - 모달에서는 지난 투두의 리스트를 제공하며 여기서 선택된 투두는 오늘의 투두로, 미선택 투두는 제거
+ - 기능 설명
+        - 모달에서 선택된 투두는 당일 투두로 변경
+        - 모달에서 미선택된 투두는 데이터에서 제거
+        - 만약, Confirm 버튼을 누르지 않고 X 버튼을 누르면 아직 미수행 지난 투두들에 대한 처리가 진행되지 않아씩 때문에 새로고침을 하면 다시 모달창이 나타난다.
+        
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 3. 투두 생성 및 수정 페이지
+![날짜 선택 캘린더](https://user-images.githubusercontent.com/79626675/167290491-2b808a98-7389-42e2-b140-d336f38e59f7.gif)
+![unknown](https://user-images.githubusercontent.com/79626675/167290498-f8bc83a2-0d2b-4ca0-bbe4-a99736b68a67.png)
 
-### Analyzing the Bundle Size
+<ol>
+<li>
+<p>‘날짜 선택 버튼 + 캘린더’ 컴포넌트</p>
+<blockquote>
+[👉자세히보기 
+](url)</blockquote>
+<ol>
+<li><strong><code>기본 버튼</code></strong> : 투두 생성 시 “날짜 선택” 보이며, 날짜 선택시 날짜가 보임. 다른 페이지에서 투두를 수정하러 오면 기존에 설정 되었던 날짜가 보임.</li>
+<li><code>**날짜 선택(메인) 페이지**</code> : 화살표 클릭 시, 한 달씩 이동. 선택된 날짜는 <code>theme color</code>로 <code>border</code> 씌워짐</li>
+<li><strong><code>월 선택 페이지</code> :</strong> 화살표 클릭 시, 1년씩 이동. 년도(<code>2022</code>) 버튼 클릭 불가</li>
+<li><code>**년도 선택 페이지</code> :** 화살표 클릭 시, 10년씩 이동. 10년(<code>2020-2029</code>)버튼 선택 불가</li>
+</ol>
+<hr>
+<ul>
+<li>
+<p>(컴포넌트 재활용을 위한) 페이지 별 특징</p>
+<p>캘린더의 페이지를 전환시키면 아래 속성들만 교체해서 데이터들을 바꿈.</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+캘린터 타입 / 특징 | column | thead 유무 | 화살표 이동 기준 | navigation (type/data)
+-- | -- | -- | -- | --
+일(main) | 7 | true | 월 | 버튼 / 년월
+월 | 4 | false | 1년 | 텍스트 / 해당 년도
+연 | 4 | false | 10년 | 텍스트 / 해당 년도의 10년 주기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+</li>
+<li>
+<p>Validation Check</p>
+<p>날짜를 선택하지 않으면, 데이터 전송 불가. 투두 수정할 경우, 선택 안 해도 기존 날짜로 보내짐.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>‘카테고리’ 선택 버튼 + ‘카테고리’ 선택 및 추가 컴포넌트</p>
+<ul>
+<li>컴포넌트 설명
+<ul>
+<li>메인 페이지에서 + 버튼 클릭하여 접속한 경우
+<ul>
+<li>새로 투두를 생성하는 것이기 때문에 불러오는 정보 없음</li>
+</ul>
+</li>
+<li>캘린더 수정 Modal 수정 버튼 클릭하여 접속한 경우
+<ul>
+<li>사용자가 수정하려는 정보의 투두 제목 출력</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>기능 설명
+<ul>
+<li>카테고리 컴포넌트 클릭 시 카테고리 정보가 담긴 컴포넌트 출력</li>
+<li>[Add Category] 버튼 클릭 시 카테고리 추가할 수 있는 컴포넌트 출력
+<ul>
+<li>한글, 영문 최대 15자 (0자인 경우 버튼 숨김)</li>
+<li>색상 버튼 클릭하면 색상 리스트(5개) 출력
+<ul>
+<li>
+<ul>
+<li>버튼 클릭 시 색상 리스트(추가로 9개) 출력 (가로 스크롤)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>카테고리 선택 후 Select 버튼 클릭 시 카테고리 컴포넌트에 정보 출력</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>New task 버튼</p>
+<ul>
+<li>버튼 클릭 시 localStorage에 저장되고 메인 페이지로 이동</li>
+</ul>
+</li>
+</ol>
+<h2>4. 캘린더 페이지</h2>
+1. ‘날짜 선택 버튼 + 캘린더’ 컴포넌트
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[👉 자세히 보기](https://velog.io/@katej927/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Todo-List-App)](https://velog.io/@katej927/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Todo-List-App)
 
-### Deployment
+1. **`기본 버튼`** : 투두 생성 시 “날짜 선택” 보이며, 날짜 선택시 날짜가 보임. 다른 페이지에서 투두를 수정하러 오면 기존에 설정 되었던 날짜가 보임. 
+    2. `**날짜 선택(메인) 페이지**` : 화살표 클릭 시, 한 달씩 이동. 선택된 날짜는 `theme color`로 `border` 씌워짐
+    3. **`월 선택 페이지` :** 화살표 클릭 시, 1년씩 이동. 년도(`2022`) 버튼 클릭 불가
+    4. `**년도 선택 페이지` :** 화살표 클릭 시, 10년씩 이동. 10년(`2020-2029`)버튼 선택 불가
+    
+    
+    - (컴포넌트 재활용을 위한) 페이지 별 특징
+        
+        캘린더의 페이지를 전환시키면 아래 속성들만 교체해서 데이터들을 바꿈.
+        
+        | 캘린터 타입 / 특징 | column | thead 유무 | 화살표 이동 기준 | navigation (type/data) |
+        | --- | --- | --- | --- | --- |
+        | 일(main) | 7 | true | 월 | 버튼 / 년월 |
+        | 월 | 4 | false | 1년 | 텍스트 / 해당 년도 |
+        | 연 | 4 | false | 10년 | 텍스트 / 해당 년도의 10년 주기 |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    - Validation Check
+        
+        날짜를 선택하지 않으면, 데이터 전송 불가. 투두 수정할 경우, 선택 안 해도 기존 날짜로 보내짐.
+        
+2. ‘카테고리’ 선택 버튼 + ‘카테고리’ 선택 및 추가 컴포넌트
+    - 컴포넌트 설명
+        - 메인 페이지에서 + 버튼 클릭하여 접속한 경우
+            - 새로 투두를 생성하는 것이기 때문에 불러오는 정보 없음
+        - 캘린더 수정 Modal 수정 버튼 클릭하여 접속한 경우
+            - 사용자가 수정하려는 정보의 투두 제목 출력
+    - 기능 설명
+        - 카테고리 컴포넌트 클릭 시 카테고리 정보가 담긴 컴포넌트 출력
+        - [Add Category] 버튼 클릭 시 카테고리 추가할 수 있는 컴포넌트 출력
+            - 한글, 영문 최대 15자 (0자인 경우 버튼 숨김)
+            - 색상 버튼 클릭하면 색상 리스트(5개) 출력
+                - + 버튼 클릭 시 색상 리스트(추가로 9개) 출력 (가로 스크롤)
+        - 카테고리 선택 후 Select 버튼 클릭 시 카테고리 컴포넌트에 정보 출력
+3. New task 버튼
+    - 버튼 클릭 시 localStorage에 저장되고 메인 페이지로 이동
 
-### `npm run build` fails to minify
+## 4. 캘린더 페이지
+![8](https://user-images.githubusercontent.com/79626675/167290616-c2a4d82a-bd2c-4ad8-8eae-0bc95a0f57ba.jpeg)
+![10](https://user-images.githubusercontent.com/79626675/167290648-b70e1225-2489-4deb-aec1-0b547204ebe0.jpeg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 캘린더 페이지
+    - 켈린더 컴포넌트
+        1. 컴포넌트 설명
+            1. 등록한 TODO 캘린더로 형식으로 확인 가능
+        2. 기능 설명
+            1. TODO 클릭시 디테일 정보 모달 오픈
+            2. 모달에서 TODO 완료, 수정, 삭제 가능.x``
+    
+    - 켈린더 모달 컴포넌트
+        1. 컴포넌트 설명
+            - Calendar 컴포넌트에서 관리하는 TODO에 대한 상세 페이지 모달
+        2. 기능
+            1. 모달 기능
+                - Calendar 컴포넌트에서 표시된 TODO 항목을 클릭할 경우 해당 TODO 정보를 나타내는 모달 화면이 띄워집니다.
+                - 모달 화면의 체크 버튼을 누를 경우 모달 화면이 닫힙니다.
+            2. 수정 기능
+                - 모달 창의 달력 버튼을 누를 경우 /updateTodo 페이지로 넘어갑니다.
+                - /updateTodo 페이지로 아래의 데이터를 넘겨줍니다.
+                    
+                    ```json
+                    location : { todo, beforePage: '/calendar', modify: true }
+                    ```
+                    
+            3. 삭제 기능
+                - 모달 화면의 쓰레기통 버튼을 누를 경우 해당 데이터를 localStorage에서 삭제합니다.
+                - 데이터가 삭제되면 모달 화면이 닫힙니다.
+        3. 실행화면
+
+![Untitled (1)](https://user-images.githubusercontent.com/79626675/167290642-df23116c-0ac1-4853-b9f8-7a21c4f9f78a.png)
+
