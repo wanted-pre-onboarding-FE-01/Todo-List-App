@@ -84,14 +84,10 @@ function TodoList() {
       <div className={styles.centering}>
         <Categories />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
-        {/* addCategory */}
-        <button type='button' onClick={openModal} aria-label='Add button'>
-          + Add Category
-        </button>
+        <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
         <AddCategory open={modalOpen} close={closeModal}>
           <AddCategoryModalSubmit />
         </AddCategory>
-        {/* addCategory */}
       </div>
     </div>
   )

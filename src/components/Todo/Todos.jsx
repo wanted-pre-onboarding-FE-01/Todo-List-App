@@ -10,10 +10,6 @@ import { SearchIcon } from '../../assets/svgs'
 import EmptyTodoList from './EmptyTodoList'
 
 function Todos({ todoListState, setTodoListState, category }) {
-  const handleAddClick = (e) => {
-    // console.log('handleAddClick')
-  }
-
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list)
     const [removed] = result.splice(startIndex, 1)
@@ -60,11 +56,8 @@ function Todos({ todoListState, setTodoListState, category }) {
 
   // search state and functions
   const [searchOpen, setSearchOpen] = useState(false)
-
   const handleToggleSearchBar = () => setSearchOpen((prev) => !prev)
-
   const [searchValue, setSearchValue] = useState()
-
   const handleChangeSearchValue = (e) => {
     const {
       currentTarget: { value },
@@ -80,7 +73,7 @@ function Todos({ todoListState, setTodoListState, category }) {
           {searchOpen && (
             <input className={styles.searchInput} placeholder='Search to do...' onChange={handleChangeSearchValue} />
           )}
-          <SearchIcon onClick={handleToggleSearchBar} />
+          <SearchIcon className={styles.searchIcon} onClick={handleToggleSearchBar} />
         </div>
       </div>
       <div className={styles.todosWrapper}>
@@ -99,7 +92,6 @@ function Todos({ todoListState, setTodoListState, category }) {
               todoList={todo}
               category={category}
               handleChange={handleChange}
-              handleAddClick={handleAddClick}
               handleDeleteClick={handleDeleteClick}
             />
           ))}
