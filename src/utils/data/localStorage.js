@@ -102,6 +102,13 @@ export const getTodayTodosByNickName = (nickName) => {
   return user.data.todoList.filter((todo) => todo.date === today)
 }
 
+export const getTodayTodosByUserId = (userId) => {
+  const user = getUserByUserId(userId)
+  const today = moment().format('YYYY/MM/DD')
+  return user.data.todoList.filter((todo) => todo.date === today)
+}
+
+
 export const deleteTodo = (nickName, willBeDeletedTodo) => {
   const userData = getUserByNickName(nickName)
   const filteredCategory =
@@ -119,4 +126,27 @@ export const deleteTodo = (nickName, willBeDeletedTodo) => {
     return user
   })
   updateAllData(filteredData)
+}
+
+export const updateTodosByUserId = (userId, todoList) => {
+  const allData = getAllData()
+  const user = getUserByUserId(userId)
+  todoList.forEach((todo) => {
+    user.data.todoList.forEach((userTodo) => {
+      if(todo.id === userTodo.id) {
+        userTodo.isDone = todo.isDone
+      }
+    })
+  })
+  allData.forEach((val) => {
+    if(val.id === userId) {
+      val.data = user.data
+    }
+  })
+  updateAllData(allData)
+}
+
+export const getIsLoginedUserByUserId = (userId) => {
+  const allData = localStorage.getItem(MAIN_STORAGE_KEY)
+  return JSON.parse(allData).filter((val) => val.id === userId && val.isLogined)[0]
 }
