@@ -19,6 +19,7 @@ export const getUserByNickName = (nickName) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.userNickName === nickName)[0]
 }
+
 export const getUserByUserId = (userId) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.id === userId)[0]
@@ -95,6 +96,12 @@ export const removeCategory = (nickName, categoryId) => {
   updateAllData(allData)
 }
 
+export const getTodayTodosByNickName = (nickName) => {
+  const user = getUserByNickName(nickName)
+  const today = moment().format('YYYY/MM/DD')
+  return user.data.todoList.filter((todo) => todo.date === today)
+}
+
 export const deleteTodo = (nickName, willBeDeletedTodo) => {
   const userData = getUserByNickName(nickName)
   const filteredCategory =
@@ -109,7 +116,7 @@ export const deleteTodo = (nickName, willBeDeletedTodo) => {
     if (user.userNickName === nickName) {
       return { ...userData, data: { category: { ...filteredCategory }, todoList: { ...filteredTodoList } } }
     }
-    return userData
+    return user
   })
   updateAllData(filteredData)
 }
