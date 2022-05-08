@@ -59,6 +59,12 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
   updateAllData(allData)
 }
 
+export const getTodayTodosByNickName = (nickName) => {
+  const user = getUserByNickName(nickName)
+  const today = moment().format('YYYY/MM/DD')
+  return user.data.todoList.filter((todo) => todo.date === today)
+}
+
 export const deleteTodo = (nickName, willBeDeletedTodo) => {
   const userData = getUserByNickName(nickName)
   const filteredCategory =
@@ -69,11 +75,11 @@ export const deleteTodo = (nickName, willBeDeletedTodo) => {
     (userTodo) => userTodo.date !== willBeDeletedTodo.date || userTodo.todo !== willBeDeletedTodo.todo
   )
   const allData = getAllData()
-  const filteredData = allData.map((userData) => {
-    if (userData.userNickName === nickName) {
-      return { ...userData, data: { category: { ...filteredCategory }, todoList: { ...filteredTodoList } } }
+  const filteredData = allData.map((user) => {
+    if (user.userNickName === nickName) {
+      return { ...user, data: { category: { ...filteredCategory }, todoList: { ...filteredTodoList } } }
     }
-    return userData
+    return user
   })
   updateAllData(filteredData)
 }

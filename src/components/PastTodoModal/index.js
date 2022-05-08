@@ -1,8 +1,9 @@
 import styles from './PastTodoModal.module.scss'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { CheckIcon } from '../../assets/svgs'
 import PropTypes from 'prop-types'
 import { IoIosClose } from 'react-icons/io'
+import useOnClickOutside from '../../hooks/useClickOutside'
 
 function PastTodoModal({isShow, data, nickName, close, submit, getCategoryByNickNameAndId}) {
   const [pastTodos, setPastTodos] = useState(data)
@@ -18,9 +19,13 @@ function PastTodoModal({isShow, data, nickName, close, submit, getCategoryByNick
     })
   }
 
+  const modalRef = useRef()
+
+  useOnClickOutside(modalRef, () => close())
+
   return(
     <div className={isShow ? styles.backBoard : styles.modalOff}>
-      <div className={styles.main}>
+      <div ref={modalRef} className={styles.main}>
         <div className={styles.closeBtnWrapper}>
           <IoIosClose color='#A8A8A8' className={styles.closeBtn} onClick={close} />
         </div>
