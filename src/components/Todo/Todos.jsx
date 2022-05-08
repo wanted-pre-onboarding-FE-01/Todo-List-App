@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { SearchIcon } from '../../assets/svgs'
+import { cx } from '../../styles'
+import EmptyTodoList from './EmptyTodoList'
 import Todo from './Todo'
 import styles from './Todos.module.scss'
-import { getAllData, updateAllData, getUserByUserId } from '../../utils/data/localStorage'
-import PropTypes from 'prop-types'
-
-import { cx } from '../../styles'
-import { SearchIcon } from '../../assets/svgs'
-import EmptyTodoList from './EmptyTodoList'
 
 function Todos({ todoListState, setTodoListState, category }) {
   const reorder = (list, startIndex, endIndex) => {
