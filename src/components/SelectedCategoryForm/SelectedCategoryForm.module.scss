@@ -1,0 +1,84 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.categoryList {
+  width: 280px;
+  height: 150px;
+  overflow-x: scroll;
+
+  li {
+    display: flex;
+    align-items: center;
+    width: 280px;
+    height: 40px;
+    padding: 0 10px;
+
+    .inputWrapper {
+      @include flexbox.flexbox(center center);
+      position: relative;
+
+      svg {
+        @include position.middleBox;
+        z-index: levels.$CHECK_ICON;
+        margin-left: 10px;
+        pointer-events: none;
+        opacity: 0;
+        transition: 0.2s;
+      }
+    }
+
+    input[type='radio'] {
+      width: 15px;
+      height: 15px;
+      margin-left: 20px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border-radius: 50%;
+
+      &:checked {
+        width: 15px;
+        height: 15px;
+        margin-left: 20px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: none;
+        border-radius: 50%;
+
+        ~ svg {
+          opacity: 1;
+        }
+      }
+    }
+
+    label {
+      position: relative;
+      margin-top: 3px;
+      margin-left: 10px;
+      font-size: 15px;
+      color: colors.$GRAY6;
+
+      .checkedIcon {
+        position: absolute;
+      }
+    }
+  }
+}
+
+.btnWrapper {
+  position: relative;
+  width: 280px;
+  height: 80px;
+
+  .selectBtn {
+    position: absolute;
+    right: 30px;
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+    color: colors.$WHITE;
+    background-color: colors.$BIG_TITLE;
+    border-radius: 30px;
+  }
+}

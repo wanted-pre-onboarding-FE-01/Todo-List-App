@@ -19,7 +19,6 @@ export const getUserByNickName = (nickName) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.userNickName === nickName)[0]
 }
-
 export const getUserByUserId = (userId) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.id === userId)[0]
