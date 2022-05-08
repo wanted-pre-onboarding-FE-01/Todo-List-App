@@ -45,7 +45,6 @@
     // "max-lines": ["warn", 150],
     "no-param-reassign": ["error", { "props": false }],
     "no-use-before-define": "off",
-
     "prefer-const": ["warn"],
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "lines-between-class-members": "off",

@@ -19,6 +19,7 @@ export const getUserByNickName = (nickName) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.userNickName === nickName)[0]
 }
+
 export const getUserByUserId = (userId) => {
   const allData = localStorage.getItem(MAIN_STORAGE_KEY)
   return JSON.parse(allData).filter((val) => val.id === userId)[0]
@@ -45,13 +46,75 @@ export const updatePastTodos = (nickName, pastTodos, deleteTodos) => {
     const index = pastTodos.findIndex((pastTodo) => pastTodo.id === deleteTodo.id)
     pastTodos.splice(index, 1)
   })
-  pastTodos.forEach((pastTodo) => {pastTodo.date = moment().format('YYYY/MM/DD')})
+  pastTodos.forEach((pastTodo) => {
+    pastTodo.date = moment().format('YYYY/MM/DD')
+  })
   userData.data.todoList.push(...pastTodos)
   const allData = getAllData()
   allData.forEach((user) => {
-    if(user.userNickName === nickName) {
+    if (user.userNickName === nickName) {
       user.data.todoList = userData.data.todoList
     }
   })
   updateAllData(allData)
+}
+
+export const editCategory = (nickName, category) => {
+  const allData = getAllData()
+  const userData =  getUserByNickName(nickName)
+  userData.data.category.forEach((value) => {
+    if(value.id === category.id) {
+      value.categoryName = category.newCategoryName
+      value.color = category.newColor
+    }
+  })
+  allData.forEach((user) => {
+   if(user.userNickName === nickName) {
+      user.data = userData.data
+    }
+  })
+  updateAllData(allData)
+}
+
+export const removeCategory = (nickName, categoryId) => {
+  const allData = getAllData()
+  const userData = getUserByNickName(nickName)
+  // remove category
+  const categoryIndex = userData.data.category.findIndex((value) => value.id === categoryId)
+  userData.data.category.splice(categoryIndex, 1)
+  allData.forEach((user) => {
+    if(user.userNickName === nickName) {
+       user.data = userData.data
+     }
+  })
+  // remove todos
+  const willDeleteTodoList = userData.data.todoList.filter((todo) => todo.categoryId === categoryId)
+  willDeleteTodoList.forEach((willDeleteTodo) => {
+    const willDeleteTodoIndex = userData.data.todoList.findIndex((todo) => todo.id === willDeleteTodo.id)
+    userData.data.todoList.splice(willDeleteTodoIndex, 1)
+  })
+  updateAllData(allData)
+}
+
+export const getTodayTodosByNickName = (nickName) => {
+  const user = getUserByNickName(nickName)
+  const today = moment().format('YYYY/MM/DD')
+  return user.data.todoList.filter((todo) => todo.date === today)
+}
+
+export const deleteTodo = (nickName, willBeDeletedTodo) => {
+  const userData = getUserByNickName(nickName)
+  const filteredCategory =
+    userData.data.todoList.filter((userTodo) => userTodo.categoryId === willBeDeletedTodo.categoryId).length === 1
+      ? userData.data.category.filter((userCategory) => userCategory.id !== willBeDeletedTodo.categoryId)
+      : userData.data.category
+  const filteredTodoList = userData.data.todoList.filter((userTodo) => userTodo.id !== willBeDeletedTodo.id)
+  const allData = getAllData()
+  const filteredData = allData.map((user) => {
+    if (userData.userNickName === nickName) {
+      return { ...user, data: { category: [...filteredCategory], todoList: [...filteredTodoList] } }
+    }
+    return user
+  })
+  updateAllData(filteredData)
 }
