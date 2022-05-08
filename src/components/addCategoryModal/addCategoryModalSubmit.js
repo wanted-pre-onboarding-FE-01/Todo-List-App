@@ -41,7 +41,7 @@ export default function Modalsubmit() {
               name='color'
               value={color}
               onChange={(e) => {
-                setColor(e.target.value)
+                setColor(e.currentTarget.value)
               }}
             />
           </div>
