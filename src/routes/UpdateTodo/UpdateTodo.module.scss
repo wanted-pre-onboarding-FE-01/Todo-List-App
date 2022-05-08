@@ -1,0 +1,50 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.textWrapper {
+  width: 280px;
+  height: 60px;
+  color: colors.$GRAY3;
+
+  input {
+    width: 280px;
+    font-size: 25px;
+
+    &::placeholder {
+      font-size: 25px;
+      color: colors.$GRAY6;
+    }
+  }
+}
+
+.selectedWrapper {
+  width: 280px;
+  height: 440px;
+
+  .selectedBtnsWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+
+    // 추후에 삭제
+    .delete {
+      position: relative;
+      width: 280px;
+      height: 50px;
+      padding-left: 50px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: colors.$GRAY6;
+      text-align: left;
+      border: 3px solid colors.$GRAYE;
+      border-radius: 35px;
+    }
+  }
+
+  .selectedListWrapper {
+    width: 280px;
+    height: 300px;
+  }
+}

@@ -1,0 +1,20 @@
+@use '/src/styles/constants/colors';
+
+.colorsWrapper {
+  width: 280px;
+  height: 35px;
+  padding: 0 20px;
+  overflow-x: scroll;
+  white-space: nowrap;
+
+  .dot {
+    width: 28px;
+    height: 28px;
+    margin-right: 14px;
+    border-radius: 50%;
+  }
+
+  button {
+    color: colors.$GRAYA;
+  }
+}
