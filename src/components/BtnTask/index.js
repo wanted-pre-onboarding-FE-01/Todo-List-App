@@ -1,6 +1,6 @@
 import styles from './BtnTask.module.scss'
 import PropTypes from 'prop-types'
-import { updateTodo, addTodo } from '../../../utils/data/localStorage'
+import { updateTodo, addTodo } from '../../utils/data/localStorage'
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
 function BtnTask({modify, nickName, todo, navigate, beforePage}) {

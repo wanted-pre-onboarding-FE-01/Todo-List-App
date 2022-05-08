@@ -12,6 +12,7 @@ function SelectedCategoryForm({
 
   const handleChangeInput = e => {
     const [categoryColor, categoryName] = e.currentTarget.value.split('|')
+    console.log(categoryColor)
     setColor(categoryColor)
     setName(categoryName)
   }

@@ -30,7 +30,7 @@ function AddCategoryForm({selectedColor, setShowCategoryColors, setTodoData, tod
     <form onSubmit={handleCategorySubmit} className={styles.form}>
       <button 
         type='button'
-        defaultValue={selectedColor}
+        value={selectedColor}
         ref={colorBtnRef}
         className={styles.addCategoryColor} 
         onClick={handleClickColorDot}

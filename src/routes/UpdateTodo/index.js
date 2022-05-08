@@ -4,10 +4,10 @@ import moment from 'moment'
 
 import styles from './UpdateTodo.module.scss'
 
-import Box from '../components/Box'
-import BtnCategory from '../components/BtnCategory'
-import BtnTask from '../components/BtnTask'
-import BtnClose from '../components/BtnClose'
+import Box from '../../components/Box'
+import BtnCategory from '../../components/BtnCategory'
+import BtnTask from '../../components/BtnTask'
+import BtnClose from '../../components/BtnClose'
 
 const strData = localStorage.getItem('todo')
 const data = JSON.parse(strData)
