@@ -108,13 +108,11 @@ export const deleteTodo = (nickName, willBeDeletedTodo) => {
     userData.data.todoList.filter((userTodo) => userTodo.categoryId === willBeDeletedTodo.categoryId).length === 1
       ? userData.data.category.filter((userCategory) => userCategory.id !== willBeDeletedTodo.categoryId)
       : userData.data.category
-  const filteredTodoList = userData.data.todoList.filter(
-    (userTodo) => userTodo.date !== willBeDeletedTodo.date || userTodo.todo !== willBeDeletedTodo.todo
-  )
+  const filteredTodoList = userData.data.todoList.filter((userTodo) => userTodo.id !== willBeDeletedTodo.id)
   const allData = getAllData()
   const filteredData = allData.map((user) => {
-    if (user.userNickName === nickName) {
-      return { ...userData, data: { category: { ...filteredCategory }, todoList: { ...filteredTodoList } } }
+    if (userData.userNickName === nickName) {
+      return { ...user, data: { category: [...filteredCategory], todoList: [...filteredTodoList] } }
     }
     return user
   })
