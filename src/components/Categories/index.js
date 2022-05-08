@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // import ModalAddCategory from '../ModalAddCategory'
 import styles from './Categories.module.scss'
@@ -9,8 +10,10 @@ import 'slick-carousel/slick/slick-theme.css'
 import { BsCalendarDate, BsPlusLg } from 'react-icons/bs'
 // import { fakeLocalStorageData } from '../../dummyData'
 import { getUserByUserId, updateAllData, getAllData } from '../../utils/data/localStorage'
+import EditCategoryModal from '../EditCategoryModal/index'
+import { useEditCategoryModal } from '../../hooks/EditCategoryModal'
 
-function Categories() {
+function Categories({setTodoListState}) {
   //   const location = useLocation()
   //   const { userId, isNewUser } = location.state
   const isNewUser = false // user dummy data
@@ -22,6 +25,8 @@ function Categories() {
   const [showModal, setShowModal] = useState(false)
   const [category, setCategory] = useState([])
   let array = []
+
+  const [isShow, selectedCategory, open, close, edit, remove] = useEditCategoryModal ('sol')
 
   const sliderSettings = {
     dots: false,
@@ -114,6 +119,7 @@ function Categories() {
     return result[0]?.filter((el, i) => el && el.isDone && el)?.length
   }
 
+
   return (
     <div className={styles.top}>
       <div className={styles.calendarBox}>
@@ -130,7 +136,7 @@ function Categories() {
       <div className={styles.categoriesBox}>
         <Slider {...sliderSettings}>
           {category.map((el, i) => (
-            <button type='button' key={`category-${i}`} className={styles.category}>
+            <button onClick={() => open(el)} type='button' key={`category-${i}`} className={styles.category}>
               <ul>
                 <li className={styles.count}>{getCategoryTotalTask(el.id)} TASK</li>
                 <li className={styles.categoryName}>{el.categoryName}</li>
@@ -150,8 +156,21 @@ function Categories() {
       {/* {showModal && (
         <ModalAddCategory showModal={showModal} handleClickClose={handleClickClose} handleClickAdd={handleClickAdd} />
       )} */}
+      <EditCategoryModal 
+        isShow={isShow} 
+        category={selectedCategory} 
+        close={close} 
+        edit={edit} 
+        remove={remove}
+        setCategory={setCategory} 
+        setTodoListState={setTodoListState}
+      />
     </div>
   )
+}
+
+Categories.propTypes = {
+  setTodoListState: PropTypes.func.isRequired,
 }
 
 export default Categories
