@@ -5,7 +5,14 @@ import { useLocation } from 'react-router-dom'
 import { CheckIcon } from '../../assets/svgs'
 import Categories from '../../components/Categories'
 
-import { getIsLoginedUserByUserId, getTodayTodosByUserId, getTodayTodosByNickName, getCategoryByNickNameAndCategoryId, getPastTodosByNickName, updateTodosByUserId } from '../../utils/data/localStorage'
+import {
+  getIsLoginedUserByUserId,
+  getTodayTodosByUserId,
+  getTodayTodosByNickName,
+  getCategoryByNickNameAndCategoryId,
+  getPastTodosByNickName,
+  updateTodosByUserId,
+} from '../../utils/data/localStorage'
 
 /* addCategory */
 
@@ -20,10 +27,10 @@ function TodoList() {
   const { state } = location
 
   /** TODO !
-   * const { userId, isNewUser } = state 
+   * const { userId, isNewUser } = state
    * 로그인 페이지 연결하면서 주석 해제하여 사용하도록 합니다.
    * newUser일 경우에 대한 35라인 getIsLoginedUserByUserId(..) 호출에 분기를 추가해야합니다.
-  */
+   */
 
   const userId = '1234sol'
 
@@ -57,13 +64,20 @@ function TodoList() {
   return (
     <div className={styles.todoList}>
       <div className={styles.centering}>
-        <Categories userId={userId} nickName={currentLoginedUser.userNickName} setTodoListState={setTodoListState}/>
+        <Categories userId={userId} nickName={currentLoginedUser.userNickName} setTodoListState={setTodoListState} />
         <Todos todoListState={todoListState} setTodoListState={setTodoListState} category={category} />
-        <PastTodoModal isShow={isShow} data={getPastTodosByNickName(currentLoginedUser.userNickName)} nickName={currentLoginedUser.userNickName} close={close} submit={submit} getCategoryByNickNameAndId={getCategoryByNickNameAndCategoryId} />
+        <PastTodoModal
+          isShow={isShow}
+          data={getPastTodosByNickName(currentLoginedUser.userNickName)}
+          nickName={currentLoginedUser.userNickName}
+          close={close}
+          submit={submit}
+          getCategoryByNickNameAndId={getCategoryByNickNameAndCategoryId}
+        />
         <button type='button' className={styles.addButton} onClick={openModal} aria-label='Add button' />
-        <AddCategory open={modalOpen} close={closeModal}>
+        {/* <AddCategory open={modalOpen} close={closeModal}>
           <AddCategoryModalSubmit />
-        </AddCategory>
+        </AddCategory> */}
       </div>
     </div>
   )
