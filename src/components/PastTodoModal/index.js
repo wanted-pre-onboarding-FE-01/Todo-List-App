@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { CheckIcon } from '../../assets/svgs'
 import PropTypes from 'prop-types'
 import { IoIosClose } from 'react-icons/io'
-import useOnClickOutside from '../../hooks/useClickOutside'
+// import useOnClickOutside from '../../hooks/useClickOutside'
 
 function PastTodoModal({isShow, data, nickName, close, submit, getCategoryByNickNameAndId}) {
   const [pastTodos, setPastTodos] = useState(data)
@@ -21,7 +21,8 @@ function PastTodoModal({isShow, data, nickName, close, submit, getCategoryByNick
 
   const modalRef = useRef()
 
-  useOnClickOutside(modalRef, () => close())
+  /** 도희님 useOnClickOutside 머지되면 주석 제거! 
+   * useOnClickOutside(modalRef, () => close()) */ 
 
   return(
     <div className={isShow ? styles.backBoard : styles.modalOff}>

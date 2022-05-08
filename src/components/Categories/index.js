@@ -63,9 +63,9 @@ function Categories({userId, nickName, setTodoListState}) {
     getCategoryArray()
   }, [categoryIdArray])
 
-  const getUserNickNameByUserId = (userId) => {
+  const getUserNickNameByUserId = (value) => {
     const allData = localStorage.getItem('todo')
-    return JSON.parse(allData).find((el) => el.id === userId).userNickName
+    return JSON.parse(allData).find((el) => el.id === value).userNickName
   }
 
   useEffect(() => {
