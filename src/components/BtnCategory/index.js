@@ -7,7 +7,8 @@ function BtnCategory({
 }) {
 
   return (
-    <button type='button' className={styles.categoryBtn} onClick={handleClickCategoryBtn}>
+    <button type='button' className={styles.categoryBtn} value={todo ? '' : `${selectCategoryColor}|${selectCategoryName}`} onClick={handleClickCategoryBtn}>
+      {/* 추후에 수정된 내용 들어올 때 value값 고치기 */}
       <div 
       className={styles.cateGoryCircle}
       style={{border: `3px solid ${todo ? 'red' : selectCategoryColor}`}}

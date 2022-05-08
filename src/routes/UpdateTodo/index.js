@@ -21,6 +21,7 @@ function TodoList() {
   const [todo, setTodo] = useState(undefined)
   const [beforePage, setBeforePage] = useState(undefined)
   const [modify, setModify] = useState(undefined)
+  const [newTask, setNewTask] = useState('')
   const [selectCategoryName, setSelectCategoryName] = useState('Select Category')
   const [selectCategoryColor, setSelectCategoryColor] = useState('#aaaaaa')
 
@@ -40,11 +41,20 @@ function TodoList() {
     setBoxOpen(prev => !prev)
   }
 
+  const handleChangeInput = e => {
+    setNewTask(e.currentTarget.value)
+  }
+
   return (
     <>
       <BtnClose handleClickClose={handleClickClose} />
       <section className={styles.textWrapper}>
-        <input type='text' placeholder='Enter new task.' defaultValue={todo ? todo.todo : ''} />
+        <input 
+          type='text' 
+          placeholder='Enter new task.' 
+          defaultValue={todo ? todo.todo : ''} 
+          onChange={handleChangeInput}
+        />
       </section>
       <main className={styles.selectedWrapper}>
         <div className={styles.selectedBtnsWrapper}>
@@ -75,6 +85,7 @@ function TodoList() {
         todo={todo}
         navigate={navigate}
         beforePage={beforePage}
+        newTask={newTask}
       />
     </>
   )

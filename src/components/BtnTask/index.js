@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { updateTodo, addTodo } from '../../utils/data/localStorage'
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
-function BtnTask({modify, nickName, todo, navigate, beforePage}) {
+function BtnTask({modify, nickName, todo, navigate, beforePage, newTask}) {
   const handleUpdateTask = () => {
     updateTodo(
       nickName,
@@ -18,8 +18,8 @@ function BtnTask({modify, nickName, todo, navigate, beforePage}) {
     addTodo(
       nickName,
       {
-        id: `${Date.now()}추가된 todo 제목`,
-        todo: '추가된 todo 제목',
+        id: `${Date.now()}${newTask}`,
+        todo: newTask,
         categoryId: '2Business',
         date: '2022/11/31',
         isDone: false,
@@ -52,7 +52,8 @@ BtnTask.propTypes = {
     isDone: PropTypes.bool.isRequired
   }),
   navigate: PropTypes.func.isRequired,
-  beforePage: PropTypes.string.isRequired
+  beforePage: PropTypes.string.isRequired,
+  newTask: PropTypes.string.isRequired
 }
 
 export default BtnTask
