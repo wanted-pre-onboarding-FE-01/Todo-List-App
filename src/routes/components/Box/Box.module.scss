@@ -1,0 +1,8 @@
+@use '/src/styles/constants/colors';
+
+.box {
+  width: 280px;
+  height: 280px;
+  border-radius: 35px;
+  box-shadow: 0 5px 10px 0 rgba(colors.$BLACK, 8%);
+}

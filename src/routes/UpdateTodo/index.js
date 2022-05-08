@@ -1,125 +1,81 @@
-import { useState, useEffect, useRef } from 'react'
-import useOnClickOutside from '../../hooks/useOnClickOutside'
-
-import AddCategoryForm from '../components/AddCategoryForm/AddCategoryForm'
-import SelectedCategoryForm from '../components/SelectedCategoryForm/SelectedCategoryForm'
-import ColorList from '../components/ColorList/ColorList'
+import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 import styles from './UpdateTodo.module.scss'
-import { GrClose } from 'react-icons/gr'
-import { BsPlusLg, BsFillCircleFill } from 'react-icons/bs'
-import { MdKeyboardArrowUp } from 'react-icons/md'
+
+import Box from '../components/Box'
+import BtnCategory from '../components/BtnCategory'
+import BtnTask from '../components/BtnTask'
+import BtnClose from '../components/BtnClose'
 
 const strData = localStorage.getItem('todo')
 const data = JSON.parse(strData)
-// 변경하기 : data[0], tempId
-console.log(data)
+const nickName = data[0].userNickName
 
 function TodoList() {
-  const boxRef = useRef()
-  const colorBtnRef = useRef(null)
-  const inputRef = useRef(null)
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const [todoData, setTodoData] = useState(data)
   const [isBoxOpen, setBoxOpen] = useState(false)
-  const [addCategoryStatus, setAddCategoryStatus] = useState(true)
-  const [showCategoryColors, setShowCategoryColors] = useState(false)
-  const [selectedColor, setSelectedColor] = useState('#8f99bf')
+  const [todo, setTodo] = useState(undefined)
+  const [beforePage, setBeforePage] = useState(undefined)
+  const [modify, setModify] = useState(undefined)
+  const [selectCategoryName, setSelectCategoryName] = useState('Select Category')
+  const [selectCategoryColor, setSelectCategoryColor] = useState('#aaaaaa')
 
-  useOnClickOutside(boxRef, () => setBoxOpen(false))
+  useEffect(() => {
+    if (location.state) {
+      setTodo(location.state.todo)
+      setBeforePage(location.state.beforePage)
+      setModify(location.state.modify)
+    }
+  }, [location.state])
 
-  const handleClickCategoryBtn = () => {setBoxOpen(prev => !prev)}
-  
-  const handleClickAddCategory = () => {
-    setAddCategoryStatus(false)
+  const handleClickClose = () => {
+    navigate(beforePage, { replace: true })
   }
 
-  const handleClickColorDot = () => {setShowCategoryColors(prev => !prev)}
-
-  const handleCategorySubmit = (e) => {
-    e.preventDefault()
-    const color = colorBtnRef.current.value
-    const categoryName = inputRef.current.value
-    const id = `${new Date().getMilliseconds() + categoryName}`
-    const newArr = [...todoData[0].data.category, {id, categoryName, color}]
-    data[0].data.category = newArr
-    setTodoData(data)
-    setAddCategoryStatus(true)
+  const handleClickCategoryBtn = () => {
+    setBoxOpen(prev => !prev)
   }
 
   return (
     <>
-      <header className={styles.closeBtnWrapper}>
-        <button type='button'>
-          <GrClose />
-        </button>
-      </header>
+      <BtnClose handleClickClose={handleClickClose} />
       <section className={styles.textWrapper}>
-        <input type='text' placeholder='Enter new task.'/>
+        <input type='text' placeholder='Enter new task.' defaultValue={todo ? todo.todo : ''} />
       </section>
       <main className={styles.selectedWrapper}>
         <div className={styles.selectedBtnsWrapper}>
-          <button type='button'>2022 / 05 / 05</button>
-          <button type='button' onClick={handleClickCategoryBtn}>
-            <div className={styles.cateGoryCircle}/>
-            Select Category
-          </button>
+          {/* 추후에 변경 */}
+          {/* <BtnCalendar forUpdateDate={moment().format('YYYY/MM/DD')}/> */}
+          <button type='button' className={styles.delete}>{todo ? todo.date : moment().format('YYYY/MM/DD')}</button>
+          <BtnCategory 
+            handleClickCategoryBtn={handleClickCategoryBtn}
+            todo={todo}
+            data={data}
+            selectCategoryName={selectCategoryName}
+            selectCategoryColor={selectCategoryColor} 
+          />
         </div>
         <div className={styles.selectedListWrapper}>
-          {isBoxOpen &&
-            <div className={styles.box} ref={boxRef}>
-              {addCategoryStatus
-                ? <button 
-                    type='button' 
-                    className={styles.addCategoryBtn} 
-                    onClick={handleClickAddCategory}
-                  >
-                  <BsPlusLg className={styles.addIcon} />
-                  <span>Add Category</span>
-                </button>
-                : <AddCategoryForm
-                selectedColor={selectedColor}
-                colorBtnRef={colorBtnRef}
-                inputRef={inputRef}
-                handleClickColorDot={handleClickColorDot}
-                handleCategorySubmit={handleCategorySubmit}
-                />
-                
-              }
-              {showCategoryColors && 
-                <ColorList 
-                setShowCategoryColors={setShowCategoryColors} 
-                  setSelectedColor={setSelectedColor} 
-                />}
-              <ul className={styles.categoryList}>
-                {todoData[0].data.category.map(category => {
-                  return (
-                    <li key={category.id}>
-                      <div className={styles.inputWrapper}>
-                        <input 
-                          type='radio' 
-                          id={category.id} 
-                          name='categoryList' 
-                          style={{border: `2px solid ${category.color}`}}
-                        />
-                        <BsFillCircleFill fill={category.color} className={styles.checkedIcon}/>
-                      </div>
-                      <label htmlFor={category.id}>{category.categoryName}</label>
-                    </li>
-                  )
-                })}
-              </ul>
-              <button type='button'>add</button>
-            </div>
-          }
+          {isBoxOpen && 
+            <Box 
+              setBoxOpen={setBoxOpen} 
+              data={data}
+              setSelectCategoryName={setSelectCategoryName}
+              setSelectCategoryColor={setSelectCategoryColor}
+            />}
         </div>
       </main>
-      <footer>
-        <button type='button' className={styles.addNewTeskBtn}>
-          <span>New task</span>
-          <MdKeyboardArrowUp size='25' className={styles.arrowBtn} />
-        </button>
-      </footer>
+      <BtnTask 
+        modify={modify} 
+        nickName={nickName} 
+        todo={todo}
+        navigate={navigate}
+        beforePage={beforePage}
+      />
     </>
   )
 }

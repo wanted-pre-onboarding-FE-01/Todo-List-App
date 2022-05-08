@@ -3,22 +3,6 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/position';
 
-.closeBtnWrapper {
-  position: absolute;
-  top: 50px;
-  right: 35px;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 2px solid colors.$GRAYD;
-    border-radius: 50%;
-  }
-}
-
 .textWrapper {
   width: 280px;
   height: 60px;
@@ -44,7 +28,8 @@
     flex-direction: column;
     margin-bottom: 5px;
 
-    button {
+    // 추후에 삭제
+    .delete {
       position: relative;
       width: 280px;
       height: 50px;
@@ -55,131 +40,11 @@
       text-align: left;
       border: 3px solid colors.$GRAYE;
       border-radius: 35px;
-
-      .cateGoryCircle {
-        position: absolute;
-        left: 20px;
-        width: 18px;
-        height: 18px;
-        border: 3px solid colors.$TASKS_TITLE;
-        border-radius: 50%;
-      }
     }
   }
 
   .selectedListWrapper {
     width: 280px;
     height: 300px;
-
-    .box {
-      width: 280px;
-      height: 280px;
-      border-radius: 35px;
-      box-shadow: 0 5px 10px 0 rgba(colors.$BLACK, 8%);
-
-      .addCategoryBtn {
-        display: flex;
-        align-items: center;
-        width: 280px;
-        height: 50px;
-        padding: 10px;
-        font-size: 13px;
-        color: colors.$GRAY6;
-        text-align: left;
-        border-top-left-radius: 35px;
-        border-top-right-radius: 35px;
-
-        .addIcon {
-          width: 11px;
-          margin-left: 20px;
-        }
-
-        span {
-          margin-left: 10px;
-        }
-      }
-
-      .categoryList {
-        width: 280px;
-        height: 150px;
-        overflow-x: scroll;
-
-        li {
-          display: flex;
-          align-items: center;
-          width: 280px;
-          height: 40px;
-          padding: 0 10px;
-
-          .inputWrapper {
-            @include flexbox.flexbox(center center);
-            position: relative;
-
-            svg {
-              @include position.middleBox;
-              z-index: levels.$CHECK_ICON;
-              margin-left: 10px;
-              pointer-events: none;
-              opacity: 0;
-              transition: 0.2s;
-            }
-          }
-
-          input[type='radio'] {
-            width: 15px;
-            height: 15px;
-            margin-left: 20px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            border-radius: 50%;
-
-            &:checked {
-              width: 15px;
-              height: 15px;
-              margin-left: 20px;
-              -webkit-appearance: none;
-              -moz-appearance: none;
-              border: none;
-              border-radius: 50%;
-
-              ~ svg {
-                opacity: 1;
-              }
-            }
-          }
-
-          label {
-            position: relative;
-            margin-top: 3px;
-            margin-left: 10px;
-            font-size: 15px;
-            color: colors.$GRAY6;
-
-            .checkedIcon {
-              position: absolute;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.addNewTeskBtn {
-  @include position.absolute(auto 40px 40px auto);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 66px;
-  font-size: 18px;
-  color: colors.$WHITE;
-  background-color: colors.$BLUE;
-  border-radius: 30px;
-  box-shadow: 0 10px 20px 0 rgba(colors.$BLACK, 15%);
-  transition: 0.2s;
-
-  &:hover {
-    background-color: rgba(colors.$BLUE, 90%);
   }
 }
