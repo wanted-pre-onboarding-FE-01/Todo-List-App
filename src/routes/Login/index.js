@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { cx } from '../../styles'
 import styles from './Login.module.scss'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const BASIC_DATA = {
   id: '',
@@ -13,8 +14,8 @@ const BASIC_DATA = {
   },
 }
 
-function Login() {
-  const [userName, setUserName] = useState('')
+function Login({currentUserName, setCurrentUserName}) {
+  const [userName, setUserName] = useState(currentUserName)
   const [isAvailableName, setIsAvailableName] = useState(false)
 
   const navigate = useNavigate()
@@ -37,7 +38,6 @@ function Login() {
       id: `${new Date().getMilliseconds()}${userName}`,
       isLogined: true,
     }
-
     try {
       if (item === null) {
         localStorage.setItem('todo', JSON.stringify([newUser]))
@@ -49,6 +49,8 @@ function Login() {
         localStorage.setItem('todo', JSON.stringify([...item, newUser]))
         navigate('/', { state: { userId: `${new Date().getMilliseconds()}${userName}`, isNewUser: true } })
       }
+      localStorage.setItem('currentUserName', userName)
+      setCurrentUserName(userName)
     } catch (e) {
       console.log(e)
     }
@@ -79,6 +81,11 @@ function Login() {
       </button>
     </div>
   )
+}
+
+Login.propTypes = {
+  currentUserName: PropTypes.string,
+  setCurrentUserName: PropTypes.func
 }
 
 export default Login
