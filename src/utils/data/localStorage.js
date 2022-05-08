@@ -69,7 +69,7 @@ export const deleteTodo = (nickName, willBeDeletedTodo) => {
   const allData = getAllData()
   const filteredData = allData.map((user) => {
     if (userData.userNickName === nickName) {
-      return { ...user, data: { category: { ...filteredCategory }, todoList: { ...filteredTodoList } } }
+      return { ...user, data: { category: [...filteredCategory], todoList: [...filteredTodoList] } }
     }
     return user
   })
