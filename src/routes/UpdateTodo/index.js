@@ -4,6 +4,7 @@ import moment from 'moment'
 
 import styles from './UpdateTodo.module.scss'
 
+import BtnCalendar from '../../components/BtnCalendar'
 import Box from '../../components/Box'
 import BtnCategory from '../../components/BtnCategory'
 import BtnTask from '../../components/BtnTask'
@@ -13,7 +14,7 @@ const strData = localStorage.getItem('todo')
 const data = JSON.parse(strData)
 const nickName = data[0].userNickName
 
-function TodoList() {
+function UpdateTodo() {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -32,6 +33,10 @@ function TodoList() {
       setModify(location.state.modify)
     }
   }, [location.state])
+
+  const getDate = (date) => {
+    console.log('getDate', date)
+  }
 
   const handleClickClose = () => {
     navigate(beforePage, { replace: true })
@@ -58,9 +63,7 @@ function TodoList() {
       </section>
       <main className={styles.selectedWrapper}>
         <div className={styles.selectedBtnsWrapper}>
-          {/* 추후에 변경 */}
-          {/* <BtnCalendar forUpdateDate={moment().format('YYYY/MM/DD')}/> */}
-          <button type='button' className={styles.delete}>{todo ? todo.date : moment().format('YYYY/MM/DD')}</button>
+          <BtnCalendar getDate={getDate} forUpdateDate={todo ? todo.date : moment().format('YYYY/MM/DD')} />
           <BtnCategory 
             handleClickCategoryBtn={handleClickCategoryBtn}
             todo={todo}
@@ -91,4 +94,4 @@ function TodoList() {
   )
 }
 
-export default TodoList
+export default UpdateTodo
